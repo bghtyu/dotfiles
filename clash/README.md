@@ -9,7 +9,7 @@
 - `shared/`：共同分组、分流顺序、自有补充、订阅示例。
 - `templates/`：各客户端的运行设置；不是可以互相复制的万能 YAML。
 - `vendor/`：上游规则原文、MIT 许可和带提交/hash 的清单。
-- `rules/sha256/`：按服务分类和内容哈希命名的共享规则文件（域名与 IP 分类分开），更新时保留旧版本。
+- `rules/sha256/`：按服务分类和内容哈希命名的共享规则文件（域名与 IP 分类分开），更新时保留旧版本；配置中的 provider 标识对应分类，例如 `google-domain`、`china-ipcidr`，重点 DNS 使用 `proxy-dns`。
 - `excluded-rules.json`：被排除的不通用上游表达式，不能误称完整移植。
 - `stash/overrides/`：预留独立的 MITM/脚本扩展，第一版不启用。
 

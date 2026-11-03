@@ -162,9 +162,9 @@ def provider_payloads(rules, client):
         parts = row.split(',')
         return (parts[2], 'ipcidr' if parts[0].startswith('IP-') else 'domain')
     rows = [r for r in rules if not r.startswith('MATCH,')]
-    for index, ((target, behavior), chunk) in enumerate(itertools.groupby(rows, key=kind), 1):
+    name_counts = {}
+    for (target, behavior), chunk in itertools.groupby(rows, key=kind):
         chunk = list(chunk)
-        name = f'route-{index:02d}'
         payload = []
         for row in chunk:
             part = row.split(',')
@@ -173,7 +173,13 @@ def provider_payloads(rules, client):
                   '加密货币': 'crypto', 'AI 服务': 'ai', 'GitHub': 'github', 'YouTube': 'youtube',
                   'Telegram': 'telegram', '声田音乐': 'spotify', 'Google': 'google', '苹果服务': 'apple',
                   'Microsoft': 'microsoft', '国际媒体': 'media', '游戏服务': 'games', '国内服务': 'china'}
-        register(name, behavior, payload, labels.get(target, 'other'))
+        label = labels.get(target)
+        if label is None:
+            raise ValueError(f'no stable provider label for routing target: {target}')
+        base = f'{label}-{behavior}'
+        name_counts[base] = name_counts.get(base, 0) + 1
+        name = base if name_counts[base] == 1 else f'{base}-{name_counts[base]}'
+        register(name, behavior, payload, label)
         references.append(f'RULE-SET,{name},{target}' + (',no-resolve' if behavior == 'ipcidr' else ''))
     policy = dns_policy(rules, client)
     register('proxy-dns', 'domain', list(policy), 'proxy-dns')

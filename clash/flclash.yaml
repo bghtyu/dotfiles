@@ -384,125 +384,125 @@ proxy-groups:
   - 美国
   - 香港
 rule-providers:
-  route-01:
+  direct-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/direct-domain-183ea8d2efa3efc9db44cbed3a3b37536bfe866c794882e59158acc99913b4ea.yaml
     interval: 86400
     type: http
-    path: ./rules/route-01-183ea8d2efa3efc9db44cbed3a3b37536bfe866c794882e59158acc99913b4ea.yaml
-  route-02:
+    path: ./rules/direct-domain-183ea8d2efa3efc9db44cbed3a3b37536bfe866c794882e59158acc99913b4ea.yaml
+  direct-ipcidr:
     behavior: ipcidr
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/direct-ipcidr-806f536b260892fab8d2f03d107770d787aef1b7bd78f1f939d5818956f5b4b0.yaml
     interval: 86400
     type: http
-    path: ./rules/route-02-806f536b260892fab8d2f03d107770d787aef1b7bd78f1f939d5818956f5b4b0.yaml
-  route-03:
+    path: ./rules/direct-ipcidr-806f536b260892fab8d2f03d107770d787aef1b7bd78f1f939d5818956f5b4b0.yaml
+  wechat-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/wechat-domain-bc9c43a5101d48ee981ece9355b96bde113cf256695663010d5e8c2c79d05263.yaml
     interval: 86400
     type: http
-    path: ./rules/route-03-bc9c43a5101d48ee981ece9355b96bde113cf256695663010d5e8c2c79d05263.yaml
-  route-04:
+    path: ./rules/wechat-domain-bc9c43a5101d48ee981ece9355b96bde113cf256695663010d5e8c2c79d05263.yaml
+  bilibili-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/bilibili-domain-466df30ba8f0aeb56de24663fa494a9dab5390ba27f9324ad6cf2d471efdb048.yaml
     interval: 86400
     type: http
-    path: ./rules/route-04-466df30ba8f0aeb56de24663fa494a9dab5390ba27f9324ad6cf2d471efdb048.yaml
-  route-05:
+    path: ./rules/bilibili-domain-466df30ba8f0aeb56de24663fa494a9dab5390ba27f9324ad6cf2d471efdb048.yaml
+  crypto-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/crypto-domain-9bb40d288ea462e10e527c7081410e98affb70e717ee8f3acb14d5086e73dc5a.yaml
     interval: 86400
     type: http
-    path: ./rules/route-05-9bb40d288ea462e10e527c7081410e98affb70e717ee8f3acb14d5086e73dc5a.yaml
-  route-06:
+    path: ./rules/crypto-domain-9bb40d288ea462e10e527c7081410e98affb70e717ee8f3acb14d5086e73dc5a.yaml
+  ai-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/ai-domain-2eb30296bf6ff1fbeb4dfc20c9ba5cb7901cdc045057acffa86e82266f15e620.yaml
     interval: 86400
     type: http
-    path: ./rules/route-06-2eb30296bf6ff1fbeb4dfc20c9ba5cb7901cdc045057acffa86e82266f15e620.yaml
-  route-07:
+    path: ./rules/ai-domain-2eb30296bf6ff1fbeb4dfc20c9ba5cb7901cdc045057acffa86e82266f15e620.yaml
+  github-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/github-domain-f9f39531b89d505c4e2d9c126ad8a58b97c8bb0dd1c780cdbabe6c92f1a3b552.yaml
     interval: 86400
     type: http
-    path: ./rules/route-07-f9f39531b89d505c4e2d9c126ad8a58b97c8bb0dd1c780cdbabe6c92f1a3b552.yaml
-  route-08:
+    path: ./rules/github-domain-f9f39531b89d505c4e2d9c126ad8a58b97c8bb0dd1c780cdbabe6c92f1a3b552.yaml
+  youtube-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/youtube-domain-71aff3568871c81892c9efdf51eccb244fe60e3148247d700987d9ef53acc754.yaml
     interval: 86400
     type: http
-    path: ./rules/route-08-71aff3568871c81892c9efdf51eccb244fe60e3148247d700987d9ef53acc754.yaml
-  route-09:
+    path: ./rules/youtube-domain-71aff3568871c81892c9efdf51eccb244fe60e3148247d700987d9ef53acc754.yaml
+  telegram-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/telegram-domain-87453f1df663c302e018281149f313c6bd36f7a4fd0b9b0dcb1b4d3a2d62f474.yaml
     interval: 86400
     type: http
-    path: ./rules/route-09-87453f1df663c302e018281149f313c6bd36f7a4fd0b9b0dcb1b4d3a2d62f474.yaml
-  route-10:
+    path: ./rules/telegram-domain-87453f1df663c302e018281149f313c6bd36f7a4fd0b9b0dcb1b4d3a2d62f474.yaml
+  spotify-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/spotify-domain-7d33c62b67458d18503c6870f0effea83c2e15fe9468f0a4636fe6c4c86ab944.yaml
     interval: 86400
     type: http
-    path: ./rules/route-10-7d33c62b67458d18503c6870f0effea83c2e15fe9468f0a4636fe6c4c86ab944.yaml
-  route-11:
+    path: ./rules/spotify-domain-7d33c62b67458d18503c6870f0effea83c2e15fe9468f0a4636fe6c4c86ab944.yaml
+  google-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/google-domain-bdd2dc6299421f63e07bbe8e2ee551086118576da67104ef28d9ca68cc49886d.yaml
     interval: 86400
     type: http
-    path: ./rules/route-11-bdd2dc6299421f63e07bbe8e2ee551086118576da67104ef28d9ca68cc49886d.yaml
-  route-12:
+    path: ./rules/google-domain-bdd2dc6299421f63e07bbe8e2ee551086118576da67104ef28d9ca68cc49886d.yaml
+  apple-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/apple-domain-e5b9a3e7db5825554ac45ec7524e5b94fcdc15880a3aa1d2f1940718aa8941d7.yaml
     interval: 86400
     type: http
-    path: ./rules/route-12-e5b9a3e7db5825554ac45ec7524e5b94fcdc15880a3aa1d2f1940718aa8941d7.yaml
-  route-13:
+    path: ./rules/apple-domain-e5b9a3e7db5825554ac45ec7524e5b94fcdc15880a3aa1d2f1940718aa8941d7.yaml
+  microsoft-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/microsoft-domain-063989dcf4c7bfec8ef7a82a2c7d461234faed19e64d2b91b3dbdfdbb2bf69fd.yaml
     interval: 86400
     type: http
-    path: ./rules/route-13-063989dcf4c7bfec8ef7a82a2c7d461234faed19e64d2b91b3dbdfdbb2bf69fd.yaml
-  route-14:
+    path: ./rules/microsoft-domain-063989dcf4c7bfec8ef7a82a2c7d461234faed19e64d2b91b3dbdfdbb2bf69fd.yaml
+  media-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/media-domain-d8ee86bfb553351abf3ca28a2746d5f9f6445e2fa2e93ad005e9bc445ae5bc02.yaml
     interval: 86400
     type: http
-    path: ./rules/route-14-d8ee86bfb553351abf3ca28a2746d5f9f6445e2fa2e93ad005e9bc445ae5bc02.yaml
-  route-15:
+    path: ./rules/media-domain-d8ee86bfb553351abf3ca28a2746d5f9f6445e2fa2e93ad005e9bc445ae5bc02.yaml
+  games-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/games-domain-65feb13f90d0ae57c0e7392e70e9c7e58c5b01dd5cf21e9b079be76df71418c5.yaml
     interval: 86400
     type: http
-    path: ./rules/route-15-65feb13f90d0ae57c0e7392e70e9c7e58c5b01dd5cf21e9b079be76df71418c5.yaml
-  route-16:
+    path: ./rules/games-domain-65feb13f90d0ae57c0e7392e70e9c7e58c5b01dd5cf21e9b079be76df71418c5.yaml
+  china-domain:
     behavior: domain
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/china-domain-ebba08527e6483ea169f8759d352954b38dd56403ac669190771580286938863.yaml
     interval: 86400
     type: http
-    path: ./rules/route-16-ebba08527e6483ea169f8759d352954b38dd56403ac669190771580286938863.yaml
-  route-17:
+    path: ./rules/china-domain-ebba08527e6483ea169f8759d352954b38dd56403ac669190771580286938863.yaml
+  china-ipcidr:
     behavior: ipcidr
     format: yaml
     url: https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/china-ipcidr-2af4860e812b3faefe73d874b0d2c63dca814d859a93ef47615a5c778ad76558.yaml
     interval: 86400
     type: http
-    path: ./rules/route-17-2af4860e812b3faefe73d874b0d2c63dca814d859a93ef47615a5c778ad76558.yaml
+    path: ./rules/china-ipcidr-2af4860e812b3faefe73d874b0d2c63dca814d859a93ef47615a5c778ad76558.yaml
   proxy-dns:
     behavior: domain
     format: yaml
@@ -514,21 +514,21 @@ rules:
 - DOMAIN,dns.alidns.com,直连
 - DOMAIN,doh.pub,直连
 - IP-CIDR,1.1.1.1/32,自动选择,no-resolve
-- RULE-SET,route-01,直连
-- RULE-SET,route-02,直连,no-resolve
-- RULE-SET,route-03,微信
-- RULE-SET,route-04,哔哩哔哩
-- RULE-SET,route-05,加密货币
-- RULE-SET,route-06,AI 服务
-- RULE-SET,route-07,GitHub
-- RULE-SET,route-08,YouTube
-- RULE-SET,route-09,Telegram
-- RULE-SET,route-10,声田音乐
-- RULE-SET,route-11,Google
-- RULE-SET,route-12,苹果服务
-- RULE-SET,route-13,Microsoft
-- RULE-SET,route-14,国际媒体
-- RULE-SET,route-15,游戏服务
-- RULE-SET,route-16,国内服务
-- RULE-SET,route-17,国内服务,no-resolve
+- RULE-SET,direct-domain,直连
+- RULE-SET,direct-ipcidr,直连,no-resolve
+- RULE-SET,wechat-domain,微信
+- RULE-SET,bilibili-domain,哔哩哔哩
+- RULE-SET,crypto-domain,加密货币
+- RULE-SET,ai-domain,AI 服务
+- RULE-SET,github-domain,GitHub
+- RULE-SET,youtube-domain,YouTube
+- RULE-SET,telegram-domain,Telegram
+- RULE-SET,spotify-domain,声田音乐
+- RULE-SET,google-domain,Google
+- RULE-SET,apple-domain,苹果服务
+- RULE-SET,microsoft-domain,Microsoft
+- RULE-SET,media-domain,国际媒体
+- RULE-SET,games-domain,游戏服务
+- RULE-SET,china-domain,国内服务
+- RULE-SET,china-ipcidr,国内服务,no-resolve
 - MATCH,兜底分流

@@ -36,6 +36,16 @@ class ConfigTests(unittest.TestCase):
     def test_generation_and_hashes(self):
         c.verify_manifest(); c.render(check=True)
 
+    def test_provider_names_are_meaningful_and_stable(self):
+        expected = {'wechat-domain', 'bilibili-domain', 'crypto-domain', 'ai-domain',
+                    'github-domain', 'youtube-domain', 'telegram-domain', 'google-domain',
+                    'apple-domain', 'microsoft-domain', 'china-domain', 'china-ipcidr', 'proxy-dns'}
+        for profile in self.profiles.values():
+            providers = profile['rule-providers']
+            self.assertTrue(expected.issubset(providers))
+            self.assertFalse(any(name.startswith('route-') for name in providers))
+            self.assertEqual(len(providers), len(set(providers)))
+
     def test_rule_file_content_addressing(self):
         files = list((c.ROOT/'rules/sha256').glob('*.yaml'))
         self.assertTrue(files)
