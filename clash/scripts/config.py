@@ -1,6 +1,6 @@
 """Small deterministic compiler for the two client profiles (no network IO)."""
 from __future__ import annotations
-import argparse, copy, hashlib, ipaddress, json, re
+import argparse, copy, hashlib, ipaddress, itertools, json, re, urllib.parse
 from pathlib import Path
 import yaml
 ROOT = Path(__file__).resolve().parents[1]
@@ -133,6 +133,58 @@ def groups(client, providers):
         result.append({'name': item['name'], 'type': 'select', 'proxies': choices})
     return result
 
+def dns_policy(rules, client):
+    """Generate focused overseas DNS categories; other domains use domestic DNS."""
+    foreign_targets = {'加密货币', 'AI 服务', 'GitHub', 'YouTube', 'Telegram', 'Google'}
+    foreign = ['https://1.1.1.1/dns-query' + ('#自动选择' if client == 'flclash' else '')]
+    policy = {}
+    for row in rules:
+        parts = row.split(',')
+        if parts[0] in ('DOMAIN', 'DOMAIN-SUFFIX') and parts[2] in foreign_targets:
+            key = ('+.' if parts[0] == 'DOMAIN-SUFFIX' else '') + parts[1]
+            policy.setdefault(key, foreign)
+    return policy
+
+def provider_payloads(rules, client):
+    """Create content-addressed reviewed files and compact provider references."""
+    docs, entries, references = {}, {}, []
+    root_url = 'https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/'
+    def register(name, behavior, payload, label):
+        text = dump({'payload': payload})
+        digest = hashlib.sha256(text.encode()).hexdigest()
+        filename = f'{label}-{behavior}-{digest}.yaml'
+        docs[filename] = text
+        entry = {'behavior': behavior, 'format': 'yaml', 'url': root_url + filename, 'interval': 86400}
+        if client == 'flclash':
+            entry.update({'type': 'http', 'path': f'./rules/{name}-{digest}.yaml'})
+        entries[name] = entry
+    def kind(row):
+        parts = row.split(',')
+        return (parts[2], 'ipcidr' if parts[0].startswith('IP-') else 'domain')
+    rows = [r for r in rules if not r.startswith('MATCH,')]
+    name_counts = {}
+    for (target, behavior), chunk in itertools.groupby(rows, key=kind):
+        chunk = list(chunk)
+        payload = []
+        for row in chunk:
+            part = row.split(',')
+            payload.append(('+' + '.' if part[0] == 'DOMAIN-SUFFIX' else '') + part[1])
+        labels = {'直连': 'direct', '全球加速': 'global', '微信': 'wechat', '哔哩哔哩': 'bilibili',
+                  '加密货币': 'crypto', 'AI 服务': 'ai', 'GitHub': 'github', 'YouTube': 'youtube',
+                  'Telegram': 'telegram', '声田音乐': 'spotify', 'Google': 'google', '苹果服务': 'apple',
+                  'Microsoft': 'microsoft', '国际媒体': 'media', '游戏服务': 'games', '国内服务': 'china'}
+        label = labels.get(target)
+        if label is None:
+            raise ValueError(f'no stable provider label for routing target: {target}')
+        base = f'{label}-{behavior}'
+        name_counts[base] = name_counts.get(base, 0) + 1
+        name = base if name_counts[base] == 1 else f'{base}-{name_counts[base]}'
+        register(name, behavior, payload, label)
+        references.append(f'RULE-SET,{name},{target}' + (',no-resolve' if behavior == 'ipcidr' else ''))
+    policy = dns_policy(rules, client)
+    register('proxy-dns', 'domain', list(policy), 'proxy-dns')
+    return docs, entries, references
+
 def build(client, subscription_file=None):
     result = load(ROOT / f'templates/{client}.yaml')
     subscriptions = load(subscription_file or ROOT / 'shared/subscriptions.example.yaml')['providers']
@@ -148,7 +200,26 @@ def build(client, subscription_file=None):
         providers[name] = provider
     result['proxy-providers'] = providers
     result['proxy-groups'] = groups(client, providers)
-    result['rules'], skipped = build_rules()
+    all_rules, skipped = build_rules()
+    _, result['rule-providers'], references = provider_payloads(all_rules, client)
+    result['rules'] = ['DOMAIN,dns.alidns.com,直连', 'DOMAIN,doh.pub,直连',
+                       'IP-CIDR,1.1.1.1/32,自动选择,no-resolve'] + references + ['MATCH,兜底分流']
+    foreign = 'https://1.1.1.1/dns-query' + ('#自动选择' if client == 'flclash' else '')
+    domestic = ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']
+    result['dns']['nameserver'] = domestic
+    result['dns']['proxy-server-nameserver'] = domestic
+    if client == 'stash': result['dns']['follow-rule'] = True
+    result['dns']['nameserver-policy'] = {'rule-set:proxy-dns': [foreign],
+        'dns.alidns.com': domestic, 'doh.pub': domestic,
+        # Bootstrap provider downloads before DNS proxy/route rules are ready.
+        'raw.githubusercontent.com': domestic}
+    for provider in providers.values():
+        host = urllib.parse.urlsplit(provider['url']).hostname
+        if host:
+            result['dns']['nameserver-policy'][host] = domestic
+    private = ['+.local', '+.lan', '+.localhost', '+.10.in-addr.arpa', '+.168.192.in-addr.arpa', '+.254.169.in-addr.arpa']
+    private += [f'+.{part}.172.in-addr.arpa' for part in range(16, 32)]
+    result['dns']['nameserver-policy'].update({key: ['system'] for key in private})
     return result, skipped
 
 def verify_manifest():
@@ -169,6 +240,20 @@ def render(check=False, subscription_file=None, output_dir=None):
     if subscription_file and not output.resolve().is_relative_to((ROOT / 'local').resolve()):
         raise ValueError('private output must be under ignored clash/local/')
     output.mkdir(parents=True, exist_ok=True)
+    rule_rows, _ = build_rules()
+    documents, _, _ = provider_payloads(rule_rows, 'flclash')
+    rule_dir = ROOT / 'rules' / 'sha256'
+    if not check:
+        rule_dir.mkdir(parents=True, exist_ok=True)
+    for filename, data in documents.items():
+        digest = hashlib.sha256(data.encode()).hexdigest()
+        if not filename.endswith(digest + '.yaml'): raise ValueError('rule filename/hash mismatch')
+        file = rule_dir / filename
+        if file.exists() and file.read_text() != data:
+            raise ValueError(f'refusing to overwrite immutable rule file: {file}')
+        if not file.exists():
+            if check: raise ValueError(f'missing generated rule file: {file}')
+            file.write_text(data)
     for client in ('flclash', 'stash'):
         config, skipped = build(client, subscription_file)
         text = '# Generated by scripts/config.py; edit shared/ and templates/, then render.\n'

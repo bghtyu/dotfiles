@@ -7,6 +7,13 @@ def check(binary):
     with tempfile.TemporaryDirectory(prefix='clash-check-') as tmp:
         root = Path(tmp)
         profile, _ = config.build('flclash')
+        # Use a local file fixture; PR rule URLs only exist on main after merge.
+        for name, rule in profile['rule-providers'].items():
+            source = config.ROOT / 'rules/sha256' / rule['url'].rsplit('/', 1)[-1]
+            path = root / ('rule-' + name + '.yaml')
+            path.write_text(source.read_text())
+            rule.update({'type': 'file', 'path': str(path)})
+            rule.pop('url', None)
         for i, name in enumerate(profile['proxy-providers']):
             provider_path = root / f'provider-{i}.yaml'
             provider_path.write_text(config.dump({'proxies': [

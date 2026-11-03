@@ -9,6 +9,7 @@
 - `shared/`：共同分组、分流顺序、自有补充、订阅示例。
 - `templates/`：各客户端的运行设置；不是可以互相复制的万能 YAML。
 - `vendor/`：上游规则原文、MIT 许可和带提交/hash 的清单。
+- `rules/sha256/`：按服务分类和内容哈希命名的共享规则文件（域名与 IP 分类分开），更新时保留旧版本；配置中的 provider 标识对应分类，例如 `google-domain`、`china-ipcidr`，重点 DNS 使用 `proxy-dns`。
 - `excluded-rules.json`：被排除的不通用上游表达式，不能误称完整移植。
 - `stash/overrides/`：预留独立的 MITM/脚本扩展，第一版不启用。
 
@@ -36,7 +37,7 @@ python clash/scripts/config.py --subscriptions clash/shared/subscriptions.local.
 - **国内用途**：同一候选集合，但把直连放第一项，确保两个客户端首次导入的默认行为一致。客户端已保存的手动选择可能优先于配置顺序。
 - 五个地区组直接用 `url-test`，按节点名称筛选；自动选择涵盖所有订阅节点，不含直连。默认每 600 秒测试，容差 50ms，避免微小延迟差导致频繁换 IP。可在 `shared/groups.yaml` 调整。
 - 地区名、国旗和常用缩写通过正则匹配，不能判断供应商真实出口；节点名称不规范时需调整过滤式。
-- 测速只代表测试地址连通性/延迟，不代表吞吐量、解锁或目标服务可用性。
+- 测速使用 IP 地址形式的 Cloudflare HTTPS 端点，避免选择代理时先依赖境外 DNS；只代表该地址连通性/延迟，不代表吞吐量、解锁或目标服务可用性。
 
 各自动组额外保留 `REJECT` 作为无节点保护，它不应通过健康检查。否则 Stash 的空组会自动变成直连。Mihomo 的正常/空订阅行为有本地合成测试；**Stash 实机尚未验证，初次导入必须检查无节点地区不走直连**。手动选择初始为 REJECT，主动选择实际节点后才可用，避免订阅失败时无意直连。
 
@@ -48,9 +49,17 @@ python clash/scripts/config.py --subscriptions clash/shared/subscriptions.local.
 
 上游来自 v2fly/domain-list-community 和 gaoyifan/china-operator-ip；原文保持固定提交，MIT 通知随仓库保留。国际媒体首版覆盖 Netflix、Disney、HBO、Prime Video、Twitch。第一版不叠加广告拦截大库。仅采用共同的域名/IP规则，不采用 PROCESS-NAME、ASN、GEOIP、GEOSITE 或 MRS，避免平台语义差异和隐式数据库下载。不能通用的正则规则写入排除报告，对应请求仍按后续分类/兜底处理。
 
-**所有运行时规则已展开在配置内**，没有客户端访问上游规则 URL 的步骤。订阅更新与规则更新分开。DNS 服务、测速地址及节点订阅属于网络服务，不是自动更新的规则文件。
+路由与 DNS 域名清单分别保存在 `rules/sha256/` 中，两个入口文件引用本仓库 main 上的具体内容哈希文件，首启会从 GitHub 下载；并非内联。配置生成时校验文件名与内容哈希、拒绝同名覆盖，更新只新增文件并保留旧文件；文件内容和文件名由 CI 校验，保留旧文件仍依赖仓库维护约定；**客户端不会自行校验哈希**。主分支链接只有 PR 合并后才能取到新文件；更新内容要审查 PR。订阅更新与规则更新分开。Mihomo v1.19.33 本地测试发现：首次无缓存且下载失败时核心仍启动，但规则集合为空，流量会按其余规则/兜底处理；不能假设自动停止或安全降级。已有缓存离线重启可用。Stash 下载失败及缓存行为尚未实测。首次导入可以先使用客户端全局模式完成下载，确认所有规则集均已下载且条目数非零，再切回规则模式；全局模式本身不保证所有 DNS 查询都经过代理。如果当前网络不能直接访问 GitHub 原始文件，首次获取可能失败，需先解决连接或用可信方式预置规则缓存；不能假设已有代理节点足以解决冷启动。
 
-DNS 使用明确列出的阿里/腾讯 DoH 与引导 DNS，便于国内使用；不宣称匿名或完全防 DNS 泄露，解析服务仍能看到查询。FlClash 使用 redir-host，TUN 由客户端控制；Stash 使用自身 iOS 网络栈。IPv6 默认关闭，仍保留私网/国内 IPv6 匹配以防客户端覆写。导入后需核对客户端 DNS/TUN 覆写，不能把“规则相同”理解为两端网络栈完全相同。
+## DNS 策略与边界
+
+两端对 Google、YouTube、AI、GitHub、加密货币和 Telegram 的重点域名使用 Cloudflare DoH（1.1.1.1）经仅含代理节点的“自动选择”组，当前共有 1,607 条去重匹配；其余域名（包括未分类的境外域名）默认使用阿里/腾讯 DoH。此清单不可能涵盖全部被污染、敏感或检测 DNS 的域名，未知境外域名可能交给国内 DNS；需要时在共享规则扩充。例如 google.cn 属于 Google 集合，将使用境外 DNS，即使具体用途可能希望直连；可按需调整分类。境外指定 DNS 无国内服务器回退，但规则文件缺失时策略不生效，会用默认国内 DNS，详见首次下载风险。客户端缓存可能短期保留旧结果。实际服务路由可手动切换，DNS 分类不会随分组切换同步。
+
+代理节点的域名通过独立的国内 DoH 解析以避免依赖循环；订阅 URL 主机名和 raw.githubusercontent.com 为启动下载规则/订阅显式采用国内 DoH，也属于国外解析例外。DoH 服务器域名仍由 223.5.5.5/119.29.29.29 引导，这些引导查询未加密且属于披露的例外。`.local`、`.lan`、`.localhost` 和部分私有 IPv4 反向查询使用系统 DNS 以便本地发现，其内容可能交给当前网络的 DNS。DNS 服务商能看到其接收到的查询。
+
+Stash 使用 Fake-IP，启用 follow-rule 将境外 DoH 出站交给代理，并保留国内 DoH 直连。DNS 分类只包含重点境外域名，不等于业务分流规则；实际表现需分别实测。需要 iOS 版 Stash 3.6 或以上支持独立代理节点 DNS；版本及实际行为未在真机验证。为避免循环，两端规则将全部目的地为 1.1.1.1/32 的连接交给自动代理，不仅仅影响 DNS。空节点防直连在 Mihomo 模拟验证通过，Stash 仍需真机验证。域名策略和分流规则采用 domain/ipcidr 规则集，但 Stash 的启动耗时、DNS 匹配和内存影响尚未测量。
+
+FlClash 保持 redir-host，TUN 默认关闭，由用户在客户端决定；开启 TUN 才有可能覆盖更多非系统代理应用。应用自带 DoH、系统 DNS、LAN DNS、浏览器安全 DNS、VPN 中断、休眠/网络切换和 IPv6 都需要单独实测。**这不是完全防 DNS 泄漏的保证。** IPv6 默认关闭，客户端覆写可能改变行为。
 
 不启用控制接口、面板或局域网代理共享。FlClash 管理内核所必需的本机通信由应用控制，不属于这份配置对外开放的 API。
 
@@ -78,11 +87,12 @@ python clash/scripts/config.py --check
 python -m unittest discover -s clash/tests -v
 python clash/scripts/check_mihomo.py /path/to/mihomo
 python clash/scripts/check_selection.py /path/to/mihomo
+python clash/scripts/check_rule_providers.py /path/to/mihomo
 ```
 
 单测覆盖重复键、上游 hash、生成一致性、引用/环、两端路由等价、分组默认值、地区筛选、分类样例、属性 include 和私有输出保护。Mihomo 检查使用合成的本地订阅，无真实账号或公网代理。选择测试只在临时进程上打开带测试口令的 `127.0.0.1` 控制接口，测试后关闭，**不会写入交付配置**。
 
-CI 下载固定版本和校验值的官方 Mihomo，仅做上述离线/回环测试。未覆盖 FlClash UI、Stash 真机、真实订阅协议、实际 DNS/网络出口；通过 CI 不代表这些已验收。首次使用请分别测试微信、B站、AI、GitHub、YouTube 等，并在客户端连接日志核对命中组。
+CI 下载固定版本和校验值的官方 Mihomo，验证规则文件及回环测试；真实 GitHub 首启下载仍需在合并后验证。未覆盖 FlClash UI、Stash 真机、真实订阅协议、实际 DNS/网络出口；通过 CI 不代表这些已验收。首次使用请分别测试微信、B站、AI、GitHub、YouTube 等，并在客户端连接日志核对命中组。
 
 ## 设计参考
 
