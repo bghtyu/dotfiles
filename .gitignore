@@ -147,3 +147,12 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Clash 本地订阅及凭证，禁止提交
+clash/shared/subscriptions.local.yaml
+clash/local/
+*.p12
+*.pfx
+*.key
+__pycache__/
+.venv/

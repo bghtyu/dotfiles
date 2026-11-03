@@ -1,0 +1,20 @@
+# 从上到下匹配，具体服务优先；国内集合最后匹配，境外默认兜底代理。
+order:
+  - {local: private, target: 直连}
+  - {local: direct, target: 直连}
+  - {local: proxy, target: 全球加速}
+  - {owned: wechat, target: 微信}
+  - {category: BiliBili, target: 哔哩哔哩}
+  - {category: Crypto, target: 加密货币}
+  - {category: AI, target: AI 服务}
+  - {category: GitHub, target: GitHub}
+  - {category: YouTube, target: YouTube}
+  - {category: Telegram, target: Telegram}
+  - {category: Spotify, target: 声田音乐}
+  - {category: Google, target: Google}
+  - {category: Apple, target: 苹果服务}
+  - {category: Microsoft, target: Microsoft}
+  - {category: GlobalMedia, target: 国际媒体}
+  - {category: Game, target: 游戏服务}
+  - {category: China, target: 国内服务}
+  - {category: ChinaIP, target: 国内服务}

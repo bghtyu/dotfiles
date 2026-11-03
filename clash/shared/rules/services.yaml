@@ -1,0 +1,12 @@
+# 微信采用窄范围自有规则，域名来源见 vendor/domain-list-community/data/tencent。
+# 不把所有 qq.com 或腾讯云 CDN 误判为微信。
+wechat:
+  - DOMAIN-SUFFIX,weixin.qq.com
+  - DOMAIN-SUFFIX,wx.qq.com
+  - DOMAIN-SUFFIX,wxapp.tc.qq.com
+  - DOMAIN-SUFFIX,wechat.com
+  - DOMAIN-SUFFIX,wechatapp.com
+  - DOMAIN-SUFFIX,weixin.com
+  - DOMAIN-SUFFIX,weixinbridge.com
+  - DOMAIN-SUFFIX,weixinsxy.com
+  - DOMAIN-SUFFIX,servicewechat.com

@@ -1,0 +1,37 @@
+name: Clash configuration
+on:
+  pull_request:
+    paths: ['clash/**', '.github/workflows/clash.yml']
+  push:
+    branches: [main]
+    paths: ['clash/**', '.github/workflows/clash.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: clash/requirements.txt
+      - run: python -m pip install -r clash/requirements.txt
+      - name: Offline source, generation and semantic tests
+        run: python -m unittest discover -s clash/tests -v
+      - name: Fetch pinned official Mihomo validator
+        shell: bash
+        run: |
+          curl --fail --location --retry 2 --max-time 60 \
+            https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-linux-amd64-compatible-v1.19.33.gz \
+            --output "$RUNNER_TEMP/mihomo.gz"
+          echo "386508bfb1c72c43b6a0eda73708ecdce82546581b0ebcb16366c53757c622b6  $RUNNER_TEMP/mihomo.gz" | sha256sum -c -
+          gzip -dc "$RUNNER_TEMP/mihomo.gz" > "$RUNNER_TEMP/mihomo"
+          chmod +x "$RUNNER_TEMP/mihomo"
+      - name: Parse synthetic subscriptions (no network requests)
+        run: python clash/scripts/check_mihomo.py "$RUNNER_TEMP/mihomo"
+      - name: Loopback-only selection and empty-provider test
+        run: python clash/scripts/check_selection.py "$RUNNER_TEMP/mihomo"

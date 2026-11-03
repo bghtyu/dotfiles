@@ -1,0 +1,7 @@
+mode: rule
+log-level: info
+ipv6: false
+# Stash 接管 iOS VPN，不复制 Mihomo 的 TUN/监听端口配置。
+dns:
+  default-nameserver: [223.5.5.5, 119.29.29.29]
+  nameserver: [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
