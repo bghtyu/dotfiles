@@ -1,0 +1,86 @@
+[
+  {
+    "line": 21,
+    "path": "vendor/domain-list-community/data/openai",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:^chatgpt-async-webps-prod-\\S+-\\d+\\.webpubsub\\.azure\\.com$"
+  },
+  {
+    "line": 12,
+    "path": "vendor/domain-list-community/data/google-play",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:^r+[0-9]+(---|\\.)sn-(2x3|ni5|j5o)\\w{5}\\.xn--ngstr-lra8j\\.com$ @cn"
+  },
+  {
+    "line": 14,
+    "path": "vendor/domain-list-community/data/google-play",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:^r+[0-9]+(---|\\.)sn-(2x3|ni5|j5o)\\w{5}\\.googlevideo\\.com$ @cn"
+  },
+  {
+    "line": 28,
+    "path": "vendor/domain-list-community/data/netflix",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:(^|\\.)apiproxy-device-prod-nlb-.+\\.amazonaws\\.com$"
+  },
+  {
+    "line": 29,
+    "path": "vendor/domain-list-community/data/netflix",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:(^|\\.)apiproxy-website-nlb-prod-.+\\.amazonaws\\.com$"
+  },
+  {
+    "line": 30,
+    "path": "vendor/domain-list-community/data/netflix",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:(^|\\.)dualstack\\.apiproxy-.+\\.amazonaws\\.com$"
+  },
+  {
+    "line": 31,
+    "path": "vendor/domain-list-community/data/netflix",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:(^|\\.)dualstack\\.ichnaea-web-.+\\.amazonaws\\.com$"
+  },
+  {
+    "line": 7,
+    "path": "vendor/domain-list-community/data/hotstar",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:^hses[1-7]?\\.akamaized\\.net$"
+  },
+  {
+    "line": 32,
+    "path": "vendor/domain-list-community/data/epicgames",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:^cdn\\d-epicgames-\\d+\\.file\\.myqcloud\\.com$ @cn"
+  },
+  {
+    "line": 33,
+    "path": "vendor/domain-list-community/data/epicgames",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:^epicgames-download\\d\\.akamaized\\.net$"
+  },
+  {
+    "line": 34,
+    "path": "vendor/domain-list-community/data/epicgames",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:^epicgames-download\\d-\\d+\\.file\\.myqcloud\\.com$ @cn"
+  },
+  {
+    "line": 31,
+    "path": "vendor/domain-list-community/data/mihoyo-cn",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:^.+-mihayo\\.akamaized\\.net$ @cn"
+  },
+  {
+    "line": 31,
+    "path": "vendor/domain-list-community/data/aws-cn",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:.+\\.awsdns-cn-[0-9][0-9]\\.(biz|com|net|top)$ @cn"
+  },
+  {
+    "line": 32,
+    "path": "vendor/domain-list-community/data/aws-cn",
+    "reason": "outside shared domain/IP subset",
+    "rule": "regexp:.+\\.awsdns-cn-[0-9][a-e0-9]\\.cn$ @cn"
+  }
+]

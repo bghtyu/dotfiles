@@ -1,0 +1,8 @@
+# 这些 URL 不可用。复制成 subscriptions.local.yaml 后只在本地填写。
+providers:
+  订阅一:
+    url: https://subscription-a.example.invalid/proxies.yaml
+    interval: 86400
+  订阅二:
+    url: https://subscription-b.example.invalid/proxies.yaml
+    interval: 86400
