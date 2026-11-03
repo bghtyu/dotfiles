@@ -35,3 +35,5 @@ jobs:
         run: python clash/scripts/check_mihomo.py "$RUNNER_TEMP/mihomo"
       - name: Loopback-only selection and empty-provider test
         run: python clash/scripts/check_selection.py "$RUNNER_TEMP/mihomo"
+      - name: Rule provider download and cache behavior (loopback)
+        run: python clash/scripts/check_rule_providers.py "$RUNNER_TEMP/mihomo"

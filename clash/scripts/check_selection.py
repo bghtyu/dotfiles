@@ -34,6 +34,13 @@ def check(binary):
             for with_node in (True, False):
                 api_port = free_port()
                 profile, _ = config.build('flclash')
+                # Use a local file fixture; PR rule URLs only exist on main after merge.
+                for name, rule in profile['rule-providers'].items():
+                    source = config.ROOT / 'rules/sha256' / rule['url'].rsplit('/', 1)[-1]
+                    path = root / ('rule-' + name + '.yaml')
+                    path.write_text(source.read_text())
+                    rule.update({'type': 'file', 'path': str(path)})
+                    rule.pop('url', None)
                 profile.update({'mixed-port': 0, 'external-controller': f'127.0.0.1:{api_port}', 'secret': 'synthetic-local-test', 'dns': {'enable': False}})
                 for i, name in enumerate(profile['proxy-providers']):
                     path = root / f'{i}.yaml'

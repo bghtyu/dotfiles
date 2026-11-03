@@ -1,4 +1,4 @@
-import importlib.util, ipaddress, json, re, tempfile, unittest
+import hashlib, importlib.util, ipaddress, json, re, tempfile, unittest
 from pathlib import Path
 SPEC = importlib.util.spec_from_file_location('config', Path(__file__).resolve().parents[1] / 'scripts/config.py')
 c = importlib.util.module_from_spec(SPEC); SPEC.loader.exec_module(c)
@@ -13,6 +13,14 @@ def route(config, host):
         fields = row.split(',')
         kind = fields[0]
         if kind == 'MATCH': return fields[1]
+        if kind == 'RULE-SET':
+            provider = config['rule-providers'][fields[1]]
+            digest = provider['url'].rsplit('/', 1)[-1]
+            payload = c.load(c.ROOT/'rules/sha256'/digest)['payload']
+            if provider['behavior'] == 'domain':
+                if any((host == v[2:] or host.endswith('.'+v[2:])) if v.startswith('+.') else host == v for v in payload): return fields[2]
+            elif ip and any(ip in ipaddress.ip_network(v) for v in payload): return fields[2]
+            continue
         value, target = fields[1:3]
         if kind == 'DOMAIN' and host == value: return target
         if kind == 'DOMAIN-SUFFIX' and (host == value or host.endswith('.' + value)): return target
@@ -27,6 +35,17 @@ class ConfigTests(unittest.TestCase):
 
     def test_generation_and_hashes(self):
         c.verify_manifest(); c.render(check=True)
+
+    def test_rule_file_content_addressing(self):
+        files = list((c.ROOT/'rules/sha256').glob('*.yaml'))
+        self.assertTrue(files)
+        for file in files:
+            expected = file.stem.rsplit('-', 1)[-1]
+            self.assertEqual(hashlib.sha256(file.read_bytes()).hexdigest(), expected, str(file))
+        for profile in self.profiles.values():
+            for provider in profile['rule-providers'].values():
+                filename = provider['url'].rsplit('/', 1)[-1]
+                self.assertTrue((c.ROOT/'rules/sha256'/filename).exists())
 
     def test_identical_routes_and_group_semantics(self):
         a, b = self.profiles.values()
@@ -57,6 +76,7 @@ class ConfigTests(unittest.TestCase):
             for row in profile['rules']:
                 fields = row.split(',')
                 self.assertIn(fields[1] if fields[0] == 'MATCH' else fields[2], groups)
+                if fields[0] == 'RULE-SET': self.assertIn(fields[1], profile['rule-providers'])
 
     def test_region_filters_and_empty_fail_closed(self):
         samples = {'新加坡': ['SG 01', '新加坡 IPLC', '🇸🇬 Node'], '日本': ['JP 01', '日本 01'],
@@ -76,15 +96,17 @@ class ConfigTests(unittest.TestCase):
                     if other != region:
                         for name in other_names: self.assertFalse(re.search(pattern, name), (region, name))
 
-    def test_no_external_management_or_rule_downloads(self):
+    def test_no_external_management_and_reviewed_rule_urls(self):
         for profile in self.profiles.values():
-            for key in ('external-controller', 'external-controller-tls', 'external-ui', 'external-ui-url', 'http', 'rule-providers', 'geox-url'):
+            for key in ('external-controller', 'external-controller-tls', 'external-ui', 'external-ui-url', 'http', 'geox-url'):
                 self.assertNotIn(key, profile)
             self.assertFalse(profile.get('allow-lan', False))
             for row in profile['rules']:
-                self.assertNotIn(row.split(',')[0], ['GEOIP', 'GEOSITE', 'IP-ASN', 'PROCESS-NAME', 'RULE-SET'])
+                self.assertNotIn(row.split(',')[0], ['GEOIP', 'GEOSITE', 'IP-ASN', 'PROCESS-NAME'])
             for provider in profile['proxy-providers'].values():
                 self.assertIn('.example.invalid/', provider['url'])
+            for provider in profile['rule-providers'].values():
+                self.assertTrue(provider['url'].startswith('https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/rules/sha256/'))
 
     def test_representative_services_and_overlap(self):
         samples = {'weixin.qq.com': '微信', 'servicewechat.com': '微信', 'www.bilibili.com': '哔哩哔哩',
@@ -98,6 +120,24 @@ class ConfigTests(unittest.TestCase):
             '223.5.5.5': '国内服务', 'unclassified.example': '兜底分流'}
         for profile in self.profiles.values():
             for host, target in samples.items(): self.assertEqual(route(profile, host), target, host)
+
+    def test_dns_split_and_cycle_guards(self):
+        for client, profile in self.profiles.items():
+            dns = profile['dns']
+            foreign = 'https://1.1.1.1/dns-query' + ('#自动选择' if client == 'flclash' else '')
+            self.assertEqual(dns['nameserver'], ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'])
+            provider = profile['rule-providers']['proxy-dns']
+            payload = c.load(c.ROOT/'rules/sha256'/provider['url'].rsplit('/',1)[-1])['payload']
+            self.assertIn('+.google.com', payload)
+            self.assertNotIn('+.baidu.com', payload)
+            self.assertEqual(dns['nameserver-policy']['+.local'], ['system'])
+            self.assertIn('+.github.com', payload)
+            self.assertNotIn('+.cn', payload)
+            self.assertIn('+.google.cn', payload)
+            self.assertNotIn('https://1.1.1.1/dns-query', dns['proxy-server-nameserver'])
+            self.assertEqual(profile['rules'][:3], ['DOMAIN,dns.alidns.com,直连', 'DOMAIN,doh.pub,直连', 'IP-CIDR,1.1.1.1/32,自动选择,no-resolve'])
+            if client == 'stash': self.assertTrue(dns['follow-rule'])
+            else: self.assertEqual(next(x for x in profile['proxy-groups'] if x['name'] == '自动选择')['proxies'], ['REJECT'])
 
     def test_duplicate_yaml_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
