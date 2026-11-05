@@ -1,10 +1,10 @@
 {
   "checked_on": "2026-11-05",
-  "notes": "Licensed scripts are byte-identical repository snapshots pinned to a prior full commit. WeChat remains external because redistribution permission is unresolved. Stash does not enforce manifest hashes; no Stash business script is executed by validation.",
+  "notes": "All five runtime scripts and their inline dependencies are repository snapshots, pinned to a prior full commit with content-addressed paths. WeChat carries only an added distribution notice; its original executable bytes are unchanged. Stash does not enforce manifest hashes.",
   "overrides": [
     {
       "file": "bilibili.stoverride",
-      "sha256": "18269fbe56e5d703f749d1fefd7234fc4d7bf110acedd88d7c4447d6a91961b1",
+      "sha256": "82d061ad5c52001161bfbdc96830b2f5b43cd7996a660134ca1dd38054c54af6",
       "upstream": {
         "url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/BiliBili.ADBlock.stoverride",
         "version": "0.7.5",
@@ -32,7 +32,7 @@
       ],
       "scripts": [
         {
-          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/config.bundle-c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d.js",
+          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/config.bundle-c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d.js",
           "sha256": "c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d",
           "bytes": 6885,
           "upstream_url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/config.bundle.js",
@@ -40,7 +40,7 @@
           "vendoring_status": "vendored"
         },
         {
-          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/request.bundle-47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a.js",
+          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/request.bundle-47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a.js",
           "sha256": "47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a",
           "bytes": 215238,
           "upstream_url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/request.bundle.js",
@@ -48,7 +48,7 @@
           "vendoring_status": "vendored"
         },
         {
-          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/response.bundle-e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60.js",
+          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/response.bundle-e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60.js",
           "sha256": "e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60",
           "bytes": 1091042,
           "upstream_url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js",
@@ -59,7 +59,7 @@
     },
     {
       "file": "wx110.stoverride",
-      "sha256": "2f881fd0e90e5deeed8a8dc6fb13ffd8afb14dca69d917d0f7ed21bb29403398",
+      "sha256": "15cb8339248e0e6e993a2f36f14d653bc4cdb3afae1298bff464e7630104d4b9",
       "upstream": {
         "revision": "29d9e686c29a5b22f4ca6239c73dc035ad808c2f",
         "url": "https://raw.githubusercontent.com/qsoyq/shell/29d9e686c29a5b22f4ca6239c73dc035ad808c2f/config/stash/override/ad/wx110.stoverride",
@@ -70,7 +70,8 @@
       "changes": [
         "Escape domain dots in request matcher.",
         "Explicitly disable archive snapshots and forced redirects, overriding persisted preferences.",
-        "Pin script URL to source commit."
+        "Pin script URL to source commit.",
+        "Vendor combined GPLv3 script with MIT/BSD component notices and a notice-only prefix; preserve all business logic."
       ],
       "mitm": [
         "weixin110.qq.com",
@@ -78,18 +79,23 @@
       ],
       "scripts": [
         {
-          "url": "https://raw.githubusercontent.com/ddgksf2013/Scripts/97b8abea5ff52b5874c90d106d241e99894460d1/weixin110.js",
-          "sha256": "46067f2f84b38afedc9115b881f1d06018feb76a17b949a596fb261abae36a7b",
-          "bytes": 88342,
-          "vendoring_status": "blocked-license",
-          "blocker": "No applicable redistribution grant established for the exact ddgksf2013 script and modifications. Current zZPiglet/Task GPLv3 does not establish coverage of the unavailable historical source or this derivative; see permission review.",
-          "permission_review": "wechat-permission-review.json"
+          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/weixin110-fcdee2c6a9b12e9156c0643b191e406e361d72ace49e71f0741373d90e649576.js",
+          "sha256": "fcdee2c6a9b12e9156c0643b191e406e361d72ace49e71f0741373d90e649576",
+          "bytes": 88958,
+          "vendoring_status": "vendored",
+          "permission_review": "wechat-permission-review.json",
+          "upstream_url": "https://raw.githubusercontent.com/ddgksf2013/Scripts/97b8abea5ff52b5874c90d106d241e99894460d1/weixin110.js",
+          "upstream_sha256": "46067f2f84b38afedc9115b881f1d06018feb76a17b949a596fb261abae36a7b",
+          "upstream_bytes": 88342,
+          "vendored_path": "clash/stash/scripts/sha256/weixin110-fcdee2c6a9b12e9156c0643b191e406e361d72ace49e71f0741373d90e649576.js",
+          "distribution_license": "GPL-3.0-only",
+          "changes": "Added dated attribution/license notice only. Removing the 616-byte prefix reproduces upstream exactly."
         }
       ]
     },
     {
       "file": "rednote.stoverride",
-      "sha256": "1c686fc2c69a38926798e0cd14e2af99ec2d8cd0fa866ef4c4718ebed42728ca",
+      "sha256": "0f65488601a27451efca41a1373718bcd6cc090251784ad6c33c9d092da2c255",
       "upstream": {
         "revision": "e8970451207e555d7fc8005ca9df9b3bb5821564",
         "url": "https://raw.githubusercontent.com/HotKids/Rules/e8970451207e555d7fc8005ca9df9b3bb5821564/Surge/Module/Stash/RedNote.stoverride",
@@ -116,7 +122,7 @@
       ],
       "scripts": [
         {
-          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js",
+          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js",
           "sha256": "318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498",
           "bytes": 28643,
           "upstream_url": "https://raw.githubusercontent.com/fmz200/wool_scripts/2dfe1fa129085015a9abed46b4474d34d4426269/Scripts/xiaohongshu/xiaohongshu.js",
@@ -126,5 +132,5 @@
       ]
     }
   ],
-  "script_snapshot_commit": "cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd"
+  "script_snapshot_commit": "cb223267964cef6154921a57596379ab2e422569"
 }

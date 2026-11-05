@@ -1,6 +1,6 @@
 # Stash 脚本静态隐私与安全审查（2026-11-05）
 
-本报告针对 `sources.json` 的五个唯一脚本字节，不代表未来上游版本。四个获许可的脚本已原样固定在本仓库；微信因许可不明仍使用原固定 commit，是尚未解决的供应链例外。固定版本阻止上游静默替换代码，不消除已有行为风险。本 PR 保留功能和默认设置，没有自动删功能、安装 CA 或调整设备。
+本报告针对 `sources.json` 的五个唯一脚本字节，不代表未来上游版本。全部五个运行时脚本及内联依赖已固定在本仓库；四个原样保存，微信只前置分发许可声明，其余字节与原固定版本一致。所有 provider 均引用本仓库固定 commit，无外部脚本例外。固定版本阻止上游静默替换代码，不消除已有行为风险。本 PR 保留功能和默认设置，没有自动删功能、安装 CA 或调整设备。
 
 ## 审查方法、边界与依赖图
 
@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | B 站 config | 内联设置 JSON；无外部 JS | 固定完整字节；入口只构造 JSON 响应，HEAD 返回空体 |
 | B 站 request/response | 内联 util（URL、参数、存储、对象处理、日志/网络适配）、gRPC、pako、protobuf 消息/运行库；request 另含 CryptoJS MD5 | 所有可执行字节已在两个 bundle 内，无外部 JS 下载；包名、精确版本、integrity、许可见 [清单](../scripts/bundled-packages.json) |
-| 微信 weixin110 | 内联 he 1.2.0 HTML 实体处理、js-base64 3.7.2 编解码、平台 API 包装 | 版本来自内联代码；五个脚本总摘要覆盖这些依赖。未复制微信源码；无 runtime 外部 JS。he/MIT、js-base64/BSD-3-Clause 并不能替未授权的主脚本授予分发许可 |
+| 微信 weixin110 | 内联 he 1.2.0 HTML 实体处理、js-base64 3.7.2 编解码、平台 API 包装 | 版本来自内联代码；原作 GPLv3、墨鱼改动 MIT、he/MIT、js-base64/BSD-3-Clause 分别保留。源码和依赖可编辑源文件已入库；许可头之后的全部原字节由单独上游摘要校验，无 runtime 外部 JS |
 | 小红书 xiaohongshu | 内联跨平台 Env；其源版本未标注，以完整脚本 SHA 确定身份 | 原样源文件及 GPLv3 已保存。Stash 使用 `$httpClient` 的存在判断走 `$persistentStore`，没有 Node 包下载 |
 
 B 站构建树中的 `@auraflare/shared`、Hono、fetch-cookie/node-fetch 及它们的 Node 传递依赖不构成设备端的隐式安装链；没有在当前 bundle 中运行或下载它们。CryptoJS 有条件的 `require("crypto")` 是 Node 内建模块探测。小红书 Env 有 `fs/path/got/tough-cookie/iconv-lite` 的 Node 分支，其中非内建包既未锁版本也未提供；当前 Stash 业务没有调用网络方法，也不会走 Node 分支。**这些文件不作为通用 Node 程序受支持，不能据本审查称其 Node 依赖完整。**
@@ -41,7 +41,7 @@ B 站构建树中的 `@auraflare/shared`、Hono、fetch-cookie/node-fetch 及它
 
 代码未验证协议、目标主机、端口或重定向去向；请求目标来自微信页面而非编译期白名单。能够影响该页面/action 数据的一方可能诱导外发 key，或触发访问其他可达地址。**未证明普通外链作者能控制微信生成的 action URL，也未证明存在实际泄露**；影响依赖页面内容、已保存 key、API 重定向与 Stash 网络策略。不把它报告为已发生的任意远程账号窃取。该请求没有显式复制原始 Cookie/Authorization 头；传输 URL 本身可带 key。禁用快照和强制跳转不关闭这条回退路径。
 
-建议在获得修改许可后，将此请求限制到精确 HTTPS 微信端点，校验端口/路径并拒绝跨域重定向，按查询参数方式添加 key；或另行实现不自动联网的授权替代脚本。本 PR 不复制或修改这个未授权文件。
+建议后续独立修复时，将此请求限制到精确 HTTPS 微信端点，校验端口/路径并拒绝跨域重定向，按查询参数方式添加 key；或另行提供不自动联网的实现。本 PR 只增加分发声明并改为本仓库固定引用，保留当前 GET/exportKey 行为，不将取得分发许可或固定版本视为风险已经修复。
 
 ### R3：B 站可选空降助手向第三方发送视频标识（低至中等隐私风险，默认关闭）
 
@@ -75,7 +75,7 @@ pako/gRPC/protobuf 的实际用途是解析/重编码响应，CryptoJS 用于 MD
 
 ## 供应链剩余事项
 
-1. 微信分发许可未解决，完整“全部脚本托管本仓库”的目标尚未达成。复核现有墨鱼文件、README、作者主页及 zZPiglet/Task 后，仍未建立覆盖该固定文件和改动的再分发依据；原作者当前仓库有 GPLv3，但所引用历史文件不可访问，不能据此替当前修改版授予许可。最小缺失是适用该文件/改动及其来源的明确许可或权利人授权，详见 [授权复核记录](wechat-permission-review.json)。未绕过这一阻碍。
-2. 四个本仓库文件引用先前快照 commit 的完整 SHA，带 SHA-256 路径；CI 对比本地和该提交中的真实 blob，检查缺失、篡改、配置引用、已知模块加载及语法。清单是审查证据，Stash 不强制校验摘要；必须保留快照提交可达性，按 README 使用 merge commit 合并。
+1. 微信按组合程序 GPLv3 分发，不能将作者对其改动的 MIT 许可误当作对整份原作重新授权。原链接的 master 分支在 `0a70fbe27dfb072dac29423d661ed3c47cf66aab` 提供原脚本、LICENSE 和 README 的 GPLv3 声明；前次仅检查默认 main 分支的缺失结论已纠正。用户提供的授权作为墨鱼本人改动的 MIT 依据，身份/具体版本范围未独立认证，公开文档只记录依据和限制，不公开私人证据内容。MIT/BSD-3-Clause 与 GPL 的兼容性可参考 [GNU 许可说明](https://www.gnu.org/licenses/license-list.en.html)；全部版权、许可及可编辑依赖源文件均保留，详见 [授权复核记录](wechat-permission-review.json)。
+2. 五个本仓库运行时文件引用先前快照 commit 的完整 SHA，带 SHA-256 路径；CI 对比本地和该提交中的真实 blob，检查缺失、篡改、配置引用、已知模块加载、声明剥除后的上游字节、可编辑依赖源码/许可证及语法。清单是审查证据，Stash 不强制校验摘要；必须保留快照提交可达性，按 README 使用 merge commit 合并。
 3. 更新需要新的源码/包许可核对、闭包审查、字节比较和新快照提交，之后才能换覆写引用。不能只改哈希让测试通过，更不能把 URL 换为 main/latest 或恢复可替换 release 资产。
 4. 真机仍需人工核对脚本下载、应用登录/播放、通知、CA/MITM、App API 变化及日志；仓库 CI 和 Mihomo 都不能替代 Stash HTTP 引擎测试。

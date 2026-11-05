@@ -93,7 +93,7 @@
     "The stored runtime file prepends a dated distribution/attribution notice only; stripping that notice reproduces every upstream byte.",
     "The private confirmation remains user-supplied evidence, with the identity/version authentication limit recorded above."
   ],
-  "current_behavior": "The existing version is being added to repository snapshots with a notice-only prefix; no business logic or GET/export-key behavior is changed.",
+  "current_behavior": "All runtime providers use repository commit snapshots. The WeChat runtime file prepends a dated distribution notice; stripping it reproduces all 88,342 upstream bytes. GET/export-key business behavior is unchanged.",
   "tool_denial": false,
   "privacy_security_review": "SECURITY-REVIEW.md",
   "permission_basis": {

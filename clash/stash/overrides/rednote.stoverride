@@ -118,38 +118,38 @@ http:
     timeout: 60
 script-providers:
   RedNote-小红书搜索页:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书搜索页__2:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书搜索页__3:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书开屏广告:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书开屏广告__2:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书详情页:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书图片视频水印:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书图片视频水印__2:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书图片视频水印__3:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书图片视频水印__4:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书评论区去水印存储:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
   RedNote-小红书评论区去水印下载:
-    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js
     interval: 86400
