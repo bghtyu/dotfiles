@@ -1,0 +1,55 @@
+{
+  "name": "@biliverse/protobuf",
+  "version": "1.1.0",
+  "description": "Generated Bilibili protobuf bindings for Biliverse",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Biliverse/protobuf.git"
+  },
+  "license": "Apache-2.0",
+  "files": [
+    "@protobuf-ts",
+    "bilibili",
+    "google",
+    "scripts",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    "./*": "./*"
+  },
+  "scripts": {
+    "generate": "node scripts/generate.cjs && node scripts/fix-import-extensions.cjs",
+    "generate:apple-mapkit": "node scripts/generate-external.cjs",
+    "fix:imports": "node ./scripts/fix-import-extensions.cjs",
+    "View": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ ./bilibili/app/view/v1/view.proto",
+    "ViewUnite": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ ./bilibili/app/viewunite/v1/viewunite.proto",
+    "Player": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/app/playerunite/v1/playerunite.proto",
+    "PlayURL": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/pgc/gateway/player/v2/playurl.proto",
+    "Search": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/polymer/app/search/v1/search.proto",
+    "PgcAnyModel": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/app/viewunite/pgcanymodel.proto",
+    "DM": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/community/service/dm/v1/dm.proto",
+    "Teenagers": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/app/interface/teenagers.proto",
+    "InterfaceSearch": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/app/interface/v1/search.proto",
+    "InterfaceSuggest": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/app/interface/v1/suggest.proto",
+    "Reply": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/main/community/reply/v1/reply.proto",
+    "ReplyV2": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/main/community/reply/v2/reply.proto",
+    "Dynamic": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/app/dynamic/v2/dynamic.proto",
+    "DynamicCoverage": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/app/dynamic/v2/coverage.proto",
+    "ViewProgress": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/app/viewunite/v1/viewprogress.proto",
+    "Popular": "protoc --ts_out ./ --ts_opt generate_dependencies --ts_opt long_type_string --ts_opt output_javascript --proto_path ./ bilibili/app/show/popular/v1/popular.proto"
+  },
+  "devDependencies": {
+    "@protobuf-ts/plugin": "^2.11.1",
+    "@protobuf-ts/protoc": "^2.11.1"
+  },
+  "dependencies": {
+    "@protobuf-ts/runtime": "^2.11.1",
+    "@protobuf-ts/runtime-rpc": "^2.11.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}

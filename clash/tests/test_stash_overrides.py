@@ -59,7 +59,7 @@ class StashOverridesTests(unittest.TestCase):
             self.assertEqual({item['name'] for item in data['http']['script']}, set(providers))
             self.assertEqual({p['url'] for p in providers.values()}, {p['url'] for p in row['scripts']})
             for url in (p['url'] for p in providers.values()):
-                self.assertRegex(url, r'^https://(?:github\.com/Biliverse/ADBlock/releases/download/v0\.7\.5/|raw\.githubusercontent\.com/(?:ddgksf2013/Scripts|fmz200/wool_scripts)/[0-9a-f]{40}/)')
+                self.assertRegex(url, r'^https://raw\.githubusercontent\.com/bghtyu/dotfiles/[0-9a-f]{40}/clash/stash/scripts/sha256/[^/]+-[0-9a-f]{64}\.js$')
             for item in data['http']['script']:
                 self.assertNotIn('Teenagers', item['match'])
                 if 'argument' in item:

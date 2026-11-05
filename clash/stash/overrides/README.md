@@ -10,7 +10,7 @@
 
 ## 导入与独立开关
 
-1. 使用已经填入自己订阅的 Stash 主配置。在 Stash 的覆写管理中，分别从文件导入上述三个 `.stoverride`，或使用以下本仓库地址（**主分支地址需 PR 合并后才可下载**；合并前可下载本 PR 分支中的文件，本地导入）。它们是覆写，不是完整代理配置。
+1. 使用已经填入自己订阅的 Stash 主配置。在 Stash 的覆写管理中，分别从文件导入上述三个 `.stoverride`，或使用以下本仓库地址（主分支会在合并后更新；审阅本 PR 时下载分支中的覆写并本地导入，脚本引用在分支推送后即可访问）。它们是覆写，不是完整代理配置。
 
    - `https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/stash/overrides/bilibili.stoverride`
    - `https://raw.githubusercontent.com/bghtyu/dotfiles/main/clash/stash/overrides/wx110.stoverride`
@@ -31,15 +31,25 @@
 
 ## 来源、固定版本与更新
 
-[sources.json](sources.json) 记录 2026-11-05 实际获取成功的覆写来源、完整提交、上游/本地 SHA-256、每个唯一脚本 URL 的大小和 SHA-256，以及本地调整。配置中保留上游作者信息；这些第三方配置和脚本的权利仍属于各自作者，不因本仓库许可而重新授权。未在仓库复制或执行远程 JS。
+[sources.json](sources.json) 保留原覆写和脚本来源、大小、SHA-256 与调整记录。五个唯一运行时脚本均已固定到 [scripts/](../scripts/README.md)，包含内联依赖及许可证/声明；覆写 URL 全部指向本仓库快照提交 `cb223267964cef6154921a57596379ab2e422569` 下的内容寻址文件。B 站三个 bundle 和小红书脚本逐字节保持原样，微信仅新增 616 字节的分发许可头，移除后与原始文件逐字节一致。没有修改脚本业务功能或默认偏好。B 站构建与原 release 除时间行外一致，证据和依赖版本已入库。
 
-B 站的三个唯一 bundle 使用固定 `v0.7.5` release URL；微信脚本固定墨鱼 `97b8abea5ff52b5874c90d106d241e99894460d1`；小红书脚本固定 fmz200 `2dfe1fa129085015a9abed46b4474d34d4426269`。后两者不跟随 `master/main` 自动改变。上游图标仍是展示资源的浮动地址，不是可执行脚本。
+微信以组合程序 GPLv3 分发：原作 zZPiglet 的明确 GPLv3 依据在原链接 `master` 分支已核实；用户提供的墨鱼 MIT 授权用于其本人改动，保留 he/MIT、js-base64/BSD-3-Clause 的声明及可编辑源文件。原始与实际分发文件的摘要、许可来源及用户提供证据的认证限制分别记录于清单和 [授权复核](wechat-permission-review.json)。授权私聊的截图、原文和联系信息未发布。
 
-`interval: 86400` 是重新获取同一 URL 的周期，不是自动升级版本。**Stash 不校验清单中的 hash**；release 资产可被上游替换或删除，固定提交资源也可能不可访问。第三方代码可访问解密内容、持久化及脚本 API；这里的静态检查不构成完整安全审计。更新时先下载候选版本，审查脚本、HTTP 匹配和精确域名，核对 hash，再在 PR 中同步配置与清单，不直接换成 `latest` 或浮动脚本。
+完整 [静态安全与隐私审查](SECURITY-REVIEW.md) 包含各脚本和内联依赖的数据流、网络目标/触发、认证数据、可选功能、日志、持久化、动态执行及未验证项。已确认小红书完整响应/媒体日志和缓存、微信回退请求主机校验不足、B 站可选第三方空降服务、认证请求补位，以及默认 WARN 仍输出的补位异常错误文本等行为。此处固定版本不能消除这些行为。微信授权依据的复核记录见 [wechat-permission-review.json](wechat-permission-review.json)。
+
+`interval: 86400` 只是重新获取同一固定 URL 的周期。Stash 不校验清单 hash；客户端仍信任 GitHub HTTPS、Stash 与覆写来源。图标仍是外部展示资源，homepage/BoxJS 是用户打开的网页入口，不是本次运行时 JS。**请以 merge commit 合并本 PR**，保留被引用的快照祖先；需要 squash/rebase 时先单独合入脚本快照，再重新引用其最终提交，避免丢掉固定提交的可达性。
+
+更新步骤：
+
+1. 在临时目录下载候选版本及完整运行时依赖图，记录完整源提交、字节、大小与摘要；先核对主文件和内联依赖许可，不复制许可不清或禁止再分发的内容。不要运行下载的业务脚本。
+2. 审查 HTTP/MITM 范围和所有网络/跳转/存储/日志/动态加载路径，更新风险与构建证据。原 bundle 已包含的代码无需在设备再加载；出现新的二次脚本依赖时必须继续解析和固定，不能只改 hash 放行。
+3. 新增内容寻址脚本文件、许可证与快照/依赖清单，先单独提交；不改写或删除仍被使用的旧资产。随后另一个提交更新覆写、`script_snapshot_commit` 和 sources 中的 URL/摘要，引用前一个提交的完整 SHA，避免自指。
+4. 执行 `python clash/scripts/check_stash_scripts.py`、`python -m unittest discover -s clash/tests -v` 及 CI。推送后再次从实际 raw URL 下载比较摘要；若访问失败不发布该覆写。检查微信许可声明、依赖源文件和剥除声明后的上游摘要；不允许新增外部脚本例外或静默回退。
+5. 在 PR 中审阅代码和报告；用 merge commit 保留快照历史，再由用户按需进行 Stash/iOS 验收和启停。回滚可关闭对应覆写，或恢复前一份已审阅的配置；已产生的日志和缓存需要另行处理。
 
 ## 验证范围
 
-仓库离线检查涵盖 YAML 重复键、三个独立覆写的脚本引用、版本固定、精确域名、清单 hash、禁止路由/DNS/CA/TLS 弱化字段以及按官方合并语义叠加后主配置分流不变。生成器不读取此目录，不会把 Stash HTTP 字段带入 FlClash。
+仓库离线检查涵盖 YAML 重复键、三个独立覆写的脚本引用、完整 commit/内容寻址、本地及 commit blob 字节、缺失/篡改/未固定依赖失败路径、JS 语法、精确域名、清单 hash、禁止路由/DNS/CA/TLS 弱化字段以及按官方合并语义叠加后主配置分流不变。生成器不读取此目录，不会把 Stash HTTP 字段带入 FlClash。另有仅提取固定 bundle 日志类的隔离合成测试，验证 WARN/ERROR 和响应对象字符串化边界；不执行 Stash 业务入口。
 
 尚无 Stash 二进制或 iOS 真机验收，不能声称脚本运行、MitM 握手、通知、当前 App 接口或去广告效果已验证。Mihomo 检查仅验证原有通用配置，**不能验证 Stash 的 HTTP 引擎与脚本**。
 
