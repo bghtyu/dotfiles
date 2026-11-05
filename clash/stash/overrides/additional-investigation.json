@@ -1,0 +1,90 @@
+{
+  "checked_on": "2026-11-05",
+  "status": "not-adopted",
+  "reason": "No reviewed equivalent with a clear complete redistribution chain; fingerprints are research records, not configured providers.",
+  "configurations": [
+    {
+      "name": "General",
+      "url": "https://raw.githubusercontent.com/ddgksf2013/Rewrite/dc3ea2c1fb2db870676b26da24006083eb1d44d3/Html/General.conf",
+      "sha256": "f759ce585a197719178cfa5fe2b48c105696c3d2cb1214d09522181233105f97",
+      "bytes": 124
+    },
+    {
+      "name": "CaiYunAds",
+      "url": "https://raw.githubusercontent.com/ddgksf2013/Rewrite/dc3ea2c1fb2db870676b26da24006083eb1d44d3/AdBlock/CaiYunAds.conf",
+      "sha256": "8ba68f9affa24bf759d157d1ab88c9920e1ea25b2cfc36720d0966ceb9220842",
+      "bytes": 3267
+    },
+    {
+      "name": "AmapAds",
+      "url": "https://raw.githubusercontent.com/ddgksf2013/Rewrite/dc3ea2c1fb2db870676b26da24006083eb1d44d3/AdBlock/AmapAds.conf",
+      "sha256": "d0c1caf909e3e9151ec890eb31bc14dc28b34c49d6c8a1ef42c147cd949564b3",
+      "bytes": 3924
+    },
+    {
+      "name": "StartUpAds",
+      "url": "https://ddgksf2013.top/rewrite/StartUpAds.conf",
+      "sha256": "9a3443554fe38d94c1b65d648c89f408c87574c674d4a7f4550c758d5d75639b",
+      "bytes": 61746
+    },
+    {
+      "name": "qsoyq-amap",
+      "url": "https://raw.githubusercontent.com/qsoyq/stash/81944fcb20ed576daca7b6363ff23a39c6f9dfe8/override/ad/amap.stoverride",
+      "sha256": "0e84948ea77df2cce81ccf4109c53c6375681a1f49f3ad61dc349fa70d602ee6",
+      "bytes": 1703
+    }
+  ],
+  "sampled_script_sources": [
+    {
+      "name": "caiyun_json.js",
+      "url": "https://raw.githubusercontent.com/ddgksf2013/Scripts/0cddbb6bc31344315afba773ebb4e7ce29f7fd8f/caiyun_json.js",
+      "sha256": "1a165112aac24bf3830fa47b77d223d85beffdeaf91ee96eef05ab9429b36844",
+      "bytes": 2337
+    },
+    {
+      "name": "amap.js",
+      "url": "https://raw.githubusercontent.com/ddgksf2013/Scripts/0cddbb6bc31344315afba773ebb4e7ce29f7fd8f/amap.js",
+      "sha256": "936aaaf97cf69b8a5a25ba49303c0470a16ac48851e8bf58080ff9f129ff7c48",
+      "bytes": 11559
+    },
+    {
+      "name": "amdc.js",
+      "url": "https://raw.githubusercontent.com/ddgksf2013/Scripts/0cddbb6bc31344315afba773ebb4e7ce29f7fd8f/amdc.js",
+      "sha256": "8217f2150f8d12ae04d2c49b5da0a838e83f4de68b34df71c2da16cc1267898f",
+      "bytes": 633
+    }
+  ],
+  "startup_unique_script_urls": [
+    "https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutAnimeAds.js",
+    "https://raw.githubusercontent.com/app2smile/rules/master/js/baidumap.js",
+    "https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js",
+    "https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/abchina.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/baishitv.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/pinganads.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/pupumarket.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/quark.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/weixin110.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/12306.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/123pan.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/555Ad.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/ahfs.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/amdc.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/caixinads.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/coolapk.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/dict.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/fly.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/hanglvzongheng.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/iqiyi_open_ads.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/ithome.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/jd_json.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/qidian.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/shunfeng_json.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/smzdm_json.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/startup.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/stay.js",
+    "https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/zhihu_openads.js"
+  ],
+  "startup_unique_mitm_entries": 437,
+  "scope_limit": "Reviewed configuration surfaces and selected CaiYun/Amap code; did not complete the entire 25-script StartUpAds dependency/security audit because it was not adopted."
+}

@@ -1,10 +1,10 @@
 {
   "checked_on": "2026-11-05",
-  "notes": "Hashes record fetched bytes for review; Stash does not enforce these hashes. Release assets can be replaced by upstream. No remote JavaScript is vendored or executed by repository validation.",
+  "notes": "Licensed scripts are byte-identical repository snapshots pinned to a prior full commit. WeChat remains external because redistribution permission is unresolved. Stash does not enforce manifest hashes; no Stash business script is executed by validation.",
   "overrides": [
     {
       "file": "bilibili.stoverride",
-      "sha256": "d7e6043d0273d8b1cb3fb238263a4204ec672e7c4d092274fffcf4b1ed60aaaa",
+      "sha256": "18269fbe56e5d703f749d1fefd7234fc4d7bf110acedd88d7c4447d6a91961b1",
       "upstream": {
         "url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/BiliBili.ADBlock.stoverride",
         "version": "0.7.5",
@@ -12,7 +12,8 @@
       },
       "changes": [
         "Remove Teenagers/ModeStatus handler (teenager-mode prompt modification is outside ad removal).",
-        "Omit empty/null argument fields; Stash documents argument as a string."
+        "Omit empty/null argument fields; Stash documents argument as a string.",
+        "Serve unmodified licensed scripts from this repository at a full snapshot commit, with content-addressed paths."
       ],
       "mitm": [
         "biliverse.github.io",
@@ -31,19 +32,28 @@
       ],
       "scripts": [
         {
-          "url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/config.bundle.js",
+          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/config.bundle-c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d.js",
           "sha256": "c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d",
-          "bytes": 6885
+          "bytes": 6885,
+          "upstream_url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/config.bundle.js",
+          "vendored_path": "clash/stash/scripts/sha256/config.bundle-c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d.js",
+          "vendoring_status": "vendored"
         },
         {
-          "url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/request.bundle.js",
+          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/request.bundle-47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a.js",
           "sha256": "47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a",
-          "bytes": 215238
+          "bytes": 215238,
+          "upstream_url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/request.bundle.js",
+          "vendored_path": "clash/stash/scripts/sha256/request.bundle-47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a.js",
+          "vendoring_status": "vendored"
         },
         {
-          "url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js",
+          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/response.bundle-e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60.js",
           "sha256": "e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60",
-          "bytes": 1091042
+          "bytes": 1091042,
+          "upstream_url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js",
+          "vendored_path": "clash/stash/scripts/sha256/response.bundle-e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60.js",
+          "vendoring_status": "vendored"
         }
       ]
     },
@@ -70,13 +80,15 @@
         {
           "url": "https://raw.githubusercontent.com/ddgksf2013/Scripts/97b8abea5ff52b5874c90d106d241e99894460d1/weixin110.js",
           "sha256": "46067f2f84b38afedc9115b881f1d06018feb76a17b949a596fb261abae36a7b",
-          "bytes": 88342
+          "bytes": 88342,
+          "vendoring_status": "blocked-license",
+          "blocker": "No license or redistribution grant at fixed ddgksf2013/Scripts commit; original zZPiglet permission chain unresolved."
         }
       ]
     },
     {
       "file": "rednote.stoverride",
-      "sha256": "dd6faf0c748b2c43f2ff947c303041783fbe9704fd8d2f7a5235ff24c3e459de",
+      "sha256": "1c686fc2c69a38926798e0cd14e2af99ec2d8cd0fa866ef4c4718ebed42728ca",
       "upstream": {
         "revision": "e8970451207e555d7fc8005ca9df9b3bb5821564",
         "url": "https://raw.githubusercontent.com/HotKids/Rules/e8970451207e555d7fc8005ca9df9b3bb5821564/Surge/Module/Stash/RedNote.stoverride",
@@ -86,7 +98,8 @@
       },
       "changes": [
         "Remove all upstream routing rules (four ad-domain REJECT rules and site-wide QUIC REJECT).",
-        "Pin script URL to source commit."
+        "Pin script URL to source commit.",
+        "Serve unmodified licensed scripts from this repository at a full snapshot commit, with content-addressed paths."
       ],
       "mitm": [
         "edith.xiaohongshu.com",
@@ -102,11 +115,15 @@
       ],
       "scripts": [
         {
-          "url": "https://raw.githubusercontent.com/fmz200/wool_scripts/2dfe1fa129085015a9abed46b4474d34d4426269/Scripts/xiaohongshu/xiaohongshu.js",
+          "url": "https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js",
           "sha256": "318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498",
-          "bytes": 28643
+          "bytes": 28643,
+          "upstream_url": "https://raw.githubusercontent.com/fmz200/wool_scripts/2dfe1fa129085015a9abed46b4474d34d4426269/Scripts/xiaohongshu/xiaohongshu.js",
+          "vendored_path": "clash/stash/scripts/sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js",
+          "vendoring_status": "vendored"
         }
       ]
     }
-  ]
+  ],
+  "script_snapshot_commit": "cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd"
 }

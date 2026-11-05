@@ -121,14 +121,14 @@ http:
     binary-mode: true
 script-providers:
   PreferencePanes.Config.ADBlock:
-    url: https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/config.bundle.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/config.bundle-c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d.js
     interval: 86400
   📺 BiliBili.ADBlock.request.json:
-    url: https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/request.bundle.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/request.bundle-47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a.js
     interval: 86400
   📺 BiliBili.ADBlock.response.json:
-    url: https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/response.bundle-e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60.js
     interval: 86400
   📺 BiliBili.ADBlock.response.grpc:
-    url: https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cccf4a05cacc49a45ebd391d2d71a3ed27cb50fd/clash/stash/scripts/sha256/response.bundle-e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60.js
     interval: 86400
