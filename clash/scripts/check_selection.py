@@ -44,7 +44,7 @@ def check(binary):
                 profile.update({'mixed-port': 0, 'external-controller': f'127.0.0.1:{api_port}', 'secret': 'synthetic-local-test', 'dns': {'enable': False}})
                 for i, name in enumerate(profile['proxy-providers']):
                     path = root / f'{i}.yaml'
-                    nodes = [{'name': f'SG synthetic {i}', 'type': 'http', 'server': '127.0.0.1', 'port': server.server_port}]
+                    nodes = [{'name': f'SG synthetic {i}', 'type': 'http', 'server': '127.0.0.1', 'port': server.server_port}] if with_node else []
                     path.write_text(config.dump({'proxies': nodes}))
                     profile['proxy-providers'][name] = {'type': 'file', 'path': str(path), 'health-check': {'enable': True, 'url': 'http://127.0.0.1/health', 'interval': 600, 'lazy': True}}
                 for group in profile['proxy-groups']:
