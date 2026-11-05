@@ -1,0 +1,103 @@
+[
+  {
+    "name": "@biliverse/protobuf",
+    "version": "1.1.0",
+    "declared_license": "Apache-2.0",
+    "resolved": "https://registry.npmjs.org/@biliverse/protobuf/-/protobuf-1.1.0.tgz",
+    "integrity": "sha512-Aj7AdzSBAihBa+ifTtYaiid/0C9qPg83xogB72Wk0cqZtyCSSwYBU/5gbeNy/2OUb0LsOZx3d1afkZfughktbA==",
+    "license_files": [],
+    "license_copies": [
+      "Biliverse-ADBlock-Apache-2.0.txt"
+    ],
+    "license_evidence": "npm package.json declares Apache-2.0; package omits LICENSE. Same Apache-2.0 license text supplied here.",
+    "package_manifest": "licenses/biliverse-protobuf-package.json"
+  },
+  {
+    "name": "@nsnanocat/grpc",
+    "version": "1.1.0",
+    "declared_license": "Apache-2.0",
+    "resolved": "https://npm.pkg.github.com/download/@nsnanocat/grpc/1.1.0/7db84ede10641c9011b5d0716cfe50566cad8e7d",
+    "integrity": "sha512-rnuhbACsOa+kEwgrKhOcEMA7DtwAhoBpGf/QT6mSuCaeCKF288dHLr2h9B/2fpiHPrw3idQhQH1UFskyDL322Q==",
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_copies": [
+      "nsnanocat-grpc-LICENSE.txt"
+    ],
+    "package_manifest": "licenses/nsnanocat-grpc-package.json",
+    "verified_mirror": "https://registry.npmjs.org/@nsnanocat/grpc/-/grpc-1.1.0.tgz"
+  },
+  {
+    "name": "@nsnanocat/util",
+    "version": "2.7.6",
+    "declared_license": "Apache-2.0",
+    "resolved": "https://registry.npmjs.org/@nsnanocat/util/-/util-2.7.6.tgz",
+    "integrity": "sha512-cnWNFUV572MkhC2Us5CBtyg515JI6iK3Froi3vKHaxJ/jFjyYJmiTxBG/pTGyHc2HFKo7DTSaE5g/GFQV3VISA==",
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_copies": [
+      "nsnanocat-util-LICENSE.txt"
+    ],
+    "package_manifest": "licenses/nsnanocat-util-package.json"
+  },
+  {
+    "name": "@protobuf-ts/runtime",
+    "version": "2.11.1",
+    "declared_license": "(Apache-2.0 AND BSD-3-Clause)",
+    "resolved": "https://registry.npmjs.org/@protobuf-ts/runtime/-/runtime-2.11.1.tgz",
+    "integrity": "sha512-KuDaT1IfHkugM2pyz+FwiY80ejWrkH1pAtOBOZFuR6SXEFTsnb/jiQWQ1rCIrcKx2BtyxnxW6BWwsVSA/Ie+WQ==",
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_copies": [
+      "protobuf-ts-runtime-LICENSE.txt",
+      "protobuf-ts-goog-varint-BSD-3-Clause.txt",
+      "protobuf-ts-protobufjs-utf8-BSD-3-Clause.txt"
+    ],
+    "package_manifest": "licenses/protobuf-ts-runtime-package.json"
+  },
+  {
+    "name": "@protobuf-ts/runtime-rpc",
+    "version": "2.11.1",
+    "declared_license": "Apache-2.0",
+    "resolved": "https://registry.npmjs.org/@protobuf-ts/runtime-rpc/-/runtime-rpc-2.11.1.tgz",
+    "integrity": "sha512-4CqqUmNA+/uMz00+d3CYKgElXO9VrEbucjnBFEjqI4GuDrEQ32MaI3q+9qPBvIGOlL4PmHXrzM32vBPWRhQKWQ==",
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_copies": [
+      "protobuf-ts-runtime-rpc-LICENSE.txt"
+    ],
+    "package_manifest": "licenses/protobuf-ts-runtime-rpc-package.json"
+  },
+  {
+    "name": "crypto-js",
+    "version": "4.2.0",
+    "declared_license": "MIT",
+    "resolved": "https://registry.npmjs.org/crypto-js/-/crypto-js-4.2.0.tgz",
+    "integrity": "sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==",
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_copies": [
+      "crypto-js-LICENSE.txt"
+    ],
+    "package_manifest": "licenses/crypto-js-package.json"
+  },
+  {
+    "name": "pako",
+    "version": "2.1.0",
+    "declared_license": "(MIT AND Zlib)",
+    "resolved": "https://registry.npmjs.org/pako/-/pako-2.1.0.tgz",
+    "integrity": "sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==",
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_copies": [
+      "pako-LICENSE.txt",
+      "pako-Zlib.txt"
+    ],
+    "package_manifest": "licenses/pako-package.json"
+  }
+]

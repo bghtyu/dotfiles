@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "checked_on": "2026-11-05",
+  "assets": [
+    {
+      "name": "config.bundle.js",
+      "path": "sha256/config.bundle-c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d.js",
+      "sha256": "c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d",
+      "bytes": 6885,
+      "runtime_script_dependencies": [],
+      "allowed_literal_requires": [],
+      "upstream": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/config.bundle.js"
+    },
+    {
+      "name": "request.bundle.js",
+      "path": "sha256/request.bundle-47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a.js",
+      "sha256": "47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a",
+      "bytes": 215238,
+      "runtime_script_dependencies": [],
+      "allowed_literal_requires": [
+        "crypto"
+      ],
+      "upstream": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/request.bundle.js"
+    },
+    {
+      "name": "response.bundle.js",
+      "path": "sha256/response.bundle-e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60.js",
+      "sha256": "e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60",
+      "bytes": 1091042,
+      "runtime_script_dependencies": [],
+      "allowed_literal_requires": [],
+      "upstream": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js"
+    },
+    {
+      "name": "xiaohongshu.js",
+      "path": "sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js",
+      "sha256": "318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498",
+      "bytes": 28643,
+      "runtime_script_dependencies": [],
+      "allowed_literal_requires": [
+        "fs",
+        "path",
+        "got",
+        "tough-cookie",
+        "iconv-lite"
+      ],
+      "upstream": "https://raw.githubusercontent.com/fmz200/wool_scripts/2dfe1fa129085015a9abed46b4474d34d4426269/Scripts/xiaohongshu/xiaohongshu.js"
+    }
+  ]
+}

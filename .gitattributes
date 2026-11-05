@@ -1,0 +1,3 @@
+# Preserve byte-identical upstream snapshots and license notices.
+clash/stash/scripts/sha256/*.js -whitespace
+clash/stash/scripts/licenses/* -whitespace

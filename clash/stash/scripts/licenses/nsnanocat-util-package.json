@@ -1,0 +1,81 @@
+{
+  "name": "@nsnanocat/util",
+  "version": "2.7.6",
+  "description": "Pure JS's util module for well-known iOS network tools",
+  "author": "VirgilClyne <Virgil@nanocat.me>",
+  "homepage": "https://NSNanoCat.github.io/util",
+  "keywords": [
+    "loon",
+    "quantumult",
+    "surge",
+    "shadowrocket",
+    "stash",
+    "egern"
+  ],
+  "license": "Apache-2.0",
+  "bugs": "https://github.com/NSNanoCat/util/issues",
+  "type": "module",
+  "main": "./index.cjs",
+  "exports": {
+    ".": {
+      "node": {
+        "import": "./index.node.mjs",
+        "require": "./index.cjs"
+      },
+      "import": "./index.mjs",
+      "require": "./index.cjs"
+    },
+    "./polyfill/fetch": {
+      "node": {
+        "import": "./polyfill/fetch.node.mjs",
+        "require": "./polyfill/fetch.cjs"
+      },
+      "import": "./polyfill/fetch.mjs",
+      "require": "./polyfill/fetch.cjs"
+    },
+    "./polyfill/Storage": {
+      "node": {
+        "import": "./polyfill/Storage.node.mjs",
+        "require": "./polyfill/Storage.cjs"
+      },
+      "import": "./polyfill/Storage.mjs",
+      "require": "./polyfill/Storage.cjs"
+    },
+    "./*": "./*"
+  },
+  "types": "types/nsnanocat-util.d.ts",
+  "scripts": {
+    "tsc:build": "npx tsc",
+    "test": "node --test test/*.test.js",
+    "test:fetch": "node --test test/fetch.test.js",
+    "test:fetch:cjs": "node --test test/fetch.test.cjs",
+    "test:merge": "node --test test/Lodash.merge.test.js",
+    "test:argument": "node --test test/argument.test.js",
+    "deprecate": "npm deprecate -f '@nsnanocat/util@0.0.0-preview' \"this package has been deprecated\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NSNanoCat/util.git"
+  },
+  "files": [
+    "index.cjs",
+    "index.mjs",
+    "index.node.mjs",
+    "lib",
+    "polyfill",
+    "getStorage.mjs",
+    "types"
+  ],
+  "dependencies": {
+    "fetch-cookie": "^3.2.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.6",
+    "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
