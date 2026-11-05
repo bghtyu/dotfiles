@@ -1,0 +1,23 @@
+# Adapted from the upstream Stash override; see sources.json for provenance.
+name: 微信 110 解锁
+desc: '- 对于被微信内置浏览器拉黑的网址发出通知
+
+  本仓库可选覆写：需本机 CA；来源和调整见 README.md / sources.json。'
+category: qsoyq
+icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/WeChat.png
+http:
+  mitm:
+  - weixin110.qq.com
+  - security.wechat.com
+  script:
+  - match: ^https://(weixin110\.qq|security\.wechat)\.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi\?
+    name: wx110
+    type: response
+    require-body: true
+    max-size: -1
+    timeout: 60
+    argument: useCache=false&forceRedirect=false
+script-providers:
+  wx110:
+    url: https://raw.githubusercontent.com/ddgksf2013/Scripts/97b8abea5ff52b5874c90d106d241e99894460d1/weixin110.js
+    interval: 86400

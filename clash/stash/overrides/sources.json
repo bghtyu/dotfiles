@@ -1,0 +1,112 @@
+{
+  "checked_on": "2026-11-05",
+  "notes": "Hashes record fetched bytes for review; Stash does not enforce these hashes. Release assets can be replaced by upstream. No remote JavaScript is vendored or executed by repository validation.",
+  "overrides": [
+    {
+      "file": "bilibili.stoverride",
+      "sha256": "d7e6043d0273d8b1cb3fb238263a4204ec672e7c4d092274fffcf4b1ed60aaaa",
+      "upstream": {
+        "url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/BiliBili.ADBlock.stoverride",
+        "version": "0.7.5",
+        "sha256": "ab836b38ea7132cb4c043a01234713ebcf4d73a99be8eee30c4e6e2dcba59b42"
+      },
+      "changes": [
+        "Remove Teenagers/ModeStatus handler (teenager-mode prompt modification is outside ad removal).",
+        "Omit empty/null argument fields; Stash documents argument as a string."
+      ],
+      "mitm": [
+        "biliverse.github.io",
+        "manga.bilibili.com",
+        "api.live.bilibili.com",
+        "api.vc.bilibili.com",
+        "app.bilibili.com",
+        "app.biliapi.net",
+        "app.biliapi.com",
+        "api.bilibili.com",
+        "api.biliapi.net",
+        "grpc.biliapi.net",
+        "cm.bilibili.com",
+        "adtrack.qianwen.com",
+        "tkio-redirect.solar-engine.com"
+      ],
+      "scripts": [
+        {
+          "url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/config.bundle.js",
+          "sha256": "c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d",
+          "bytes": 6885
+        },
+        {
+          "url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/request.bundle.js",
+          "sha256": "47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a",
+          "bytes": 215238
+        },
+        {
+          "url": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js",
+          "sha256": "e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60",
+          "bytes": 1091042
+        }
+      ]
+    },
+    {
+      "file": "wx110.stoverride",
+      "sha256": "2f881fd0e90e5deeed8a8dc6fb13ffd8afb14dca69d917d0f7ed21bb29403398",
+      "upstream": {
+        "revision": "29d9e686c29a5b22f4ca6239c73dc035ad808c2f",
+        "url": "https://raw.githubusercontent.com/qsoyq/shell/29d9e686c29a5b22f4ca6239c73dc035ad808c2f/config/stash/override/ad/wx110.stoverride",
+        "source_repository": "qsoyq/shell",
+        "path": "config/stash/override/ad/wx110.stoverride",
+        "sha256": "1d17bef48a7a529cd9acb11e168db43e35e1f973e0c4b8612e65831df59e7978"
+      },
+      "changes": [
+        "Escape domain dots in request matcher.",
+        "Explicitly disable archive snapshots and forced redirects, overriding persisted preferences.",
+        "Pin script URL to source commit."
+      ],
+      "mitm": [
+        "weixin110.qq.com",
+        "security.wechat.com"
+      ],
+      "scripts": [
+        {
+          "url": "https://raw.githubusercontent.com/ddgksf2013/Scripts/97b8abea5ff52b5874c90d106d241e99894460d1/weixin110.js",
+          "sha256": "46067f2f84b38afedc9115b881f1d06018feb76a17b949a596fb261abae36a7b",
+          "bytes": 88342
+        }
+      ]
+    },
+    {
+      "file": "rednote.stoverride",
+      "sha256": "dd6faf0c748b2c43f2ff947c303041783fbe9704fd8d2f7a5235ff24c3e459de",
+      "upstream": {
+        "revision": "e8970451207e555d7fc8005ca9df9b3bb5821564",
+        "url": "https://raw.githubusercontent.com/HotKids/Rules/e8970451207e555d7fc8005ca9df9b3bb5821564/Surge/Module/Stash/RedNote.stoverride",
+        "source_repository": "HotKids/Rules",
+        "path": "Surge/Module/Stash/RedNote.stoverride",
+        "sha256": "58a4b7ae3c97fee17c1b646121bf5ebee814f201d7dddada9cfa5915a70a27aa"
+      },
+      "changes": [
+        "Remove all upstream routing rules (four ad-domain REJECT rules and site-wide QUIC REJECT).",
+        "Pin script URL to source commit."
+      ],
+      "mitm": [
+        "edith.xiaohongshu.com",
+        "www.xiaohongshu.com",
+        "ci.xiaohongshu.com",
+        "rec.xiaohongshu.com",
+        "so.xiaohongshu.com",
+        "edith.rnote.com",
+        "www.rnote.com",
+        "ci.rnote.com",
+        "so.rnote.com",
+        "rec.rnote.com"
+      ],
+      "scripts": [
+        {
+          "url": "https://raw.githubusercontent.com/fmz200/wool_scripts/2dfe1fa129085015a9abed46b4474d34d4426269/Scripts/xiaohongshu/xiaohongshu.js",
+          "sha256": "318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498",
+          "bytes": 28643
+        }
+      ]
+    }
+  ]
+}
