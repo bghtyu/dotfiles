@@ -6,7 +6,7 @@
 
 - Biliverse ADBlock v0.7.5：Apache-2.0。作者 ClydeTime、VirgilClyne、app2smile、RuCu6、Maasea；对应源提交 `b0051916843f269d4b377aaf177f0d9e7b12e393`。三个 bundle 已含全部运行时 JS；许可和包的原始 `package.json` 保存在 `licenses/`，七个实际打入 bundle 的包见 `bundled-packages.json`。保留 pako 的内联声明，同时补齐 protobuf-ts 的两项 BSD 声明。`@biliverse/protobuf` npm 包声明 Apache-2.0，但未附许可正文，这里随附相同 Apache-2.0 文本；其 GitHub 源仓库在核对时不可访问。
 - fmz200 小红书：原样可编辑 JavaScript 源文件（含内联 Env 工具），适用来源仓库固定提交的 GPLv3，完整文本为 `licenses/fmz200-GPL-3.0.txt`。未改动、未压缩源文件，保留作者和注释；这是一项独立程序的集合分发，不将其改授 Apache-2.0。来源 README 另提醒不要在中国大陆平台传播项目内容；本次分发目标为 GitHub。
-- 微信 ddgksf2013/weixin110.js：未复制。固定源提交没有 LICENSE，文件无再分发授权，原作者 zZPiglet 的许可链也未确立。没有把公开可读误当作复制许可。覆写暂保留原固定提交 URL；该项未完成本仓库托管，需要权利人明确授权或另行授权的替代实现。
+- 微信 ddgksf2013/weixin110.js：未复制。固定源提交没有 LICENSE，文件无再分发授权，原作者 zZPiglet 现有仓库虽标 GPLv3，但原链接的历史文件不可访问，也未建立该许可对当前修改版的适用链；详见 [复核记录](../overrides/wechat-permission-review.json)。没有把公开可读误当作复制许可。覆写暂保留原固定提交 URL；该项未完成本仓库托管，需要权利人明确授权或另行授权的替代实现。
 
 `build-evidence.json` 记录 Biliverse 构建核对及实际渲染模块清单。使用固定源提交、原 lockfile 的版本和 integrity，通过 npm 公共镜像获取两个原 GitHub Packages 项目（tarball integrity 相同），以 `npm ci --ignore-scripts` 安装工具，执行原 Rollup 构建；配置 bundle 字节完全一致，request/response 去掉首行构建时间后字节完全一致。配置生成输入从已下载 config bundle 中以 JSON 解析提取；因此证明的是 JS 打包内容对应源代码和锁定依赖，未独立复现 arguments-builder 的配置生成过程。没有执行这些 Stash 业务脚本，也没有运行包的安装脚本。`rendered_modules` 含 Rollup/CommonJS 合成模块标识；它们不是运行时远程依赖。build-only 工具及没有渲染进 bundle 的 Node/Worker 依赖不需要设备另行下载。
 

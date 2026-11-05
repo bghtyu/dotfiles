@@ -82,7 +82,8 @@
           "sha256": "46067f2f84b38afedc9115b881f1d06018feb76a17b949a596fb261abae36a7b",
           "bytes": 88342,
           "vendoring_status": "blocked-license",
-          "blocker": "No license or redistribution grant at fixed ddgksf2013/Scripts commit; original zZPiglet permission chain unresolved."
+          "blocker": "No applicable redistribution grant established for the exact ddgksf2013 script and modifications. Current zZPiglet/Task GPLv3 does not establish coverage of the unavailable historical source or this derivative; see permission review.",
+          "permission_review": "wechat-permission-review.json"
         }
       ]
     },

@@ -1,0 +1,75 @@
+{
+  "checked_on": "2026-11-05",
+  "requested_action": "Redistribute the currently configured WeChat script in public bghtyu/dotfiles and change the provider to a repository snapshot.",
+  "target": {
+    "repository": "ddgksf2013/Scripts",
+    "commit": "97b8abea5ff52b5874c90d106d241e99894460d1",
+    "path": "weixin110.js",
+    "bytes": 88342,
+    "sha256": "46067f2f84b38afedc9115b881f1d06018feb76a17b949a596fb261abae36a7b"
+  },
+  "status": "unresolved-permission-not-vendored",
+  "checks": [
+    {
+      "repository": "ddgksf2013/Scripts",
+      "checked_commit": "0cddbb6bc31344315afba773ebb4e7ce29f7fd8f",
+      "github_detected_license": null,
+      "notice_paths_found": [
+        "README.md"
+      ],
+      "reviewed_documents": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/ddgksf2013/Scripts/blob/0cddbb6bc31344315afba773ebb4e7ce29f7fd8f/README.md",
+          "sha256": "16524daebe853e222ff30fdb8e0004224328fcaa46e72044dc227819fec32b66"
+        }
+      ]
+    },
+    {
+      "repository": "ddgksf2013/ddgksf2013",
+      "checked_commit": "dd96698b7c4c4bce3aed90067d9af57fb8036a44",
+      "github_detected_license": null,
+      "notice_paths_found": [
+        "README.md"
+      ],
+      "reviewed_documents": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/ddgksf2013/ddgksf2013/blob/dd96698b7c4c4bce3aed90067d9af57fb8036a44/README.md",
+          "sha256": "adbdbfdb8ea4b821963d988d9ca70f92cc4d3b108d8c75c798328610832e66a8"
+        }
+      ]
+    },
+    {
+      "repository": "zZPiglet/Task",
+      "checked_commit": "985019e33689e06a303e7e28aed92b8d779415ad",
+      "github_detected_license": "GPL-3.0",
+      "notice_paths_found": [
+        "LICENSE",
+        "README.md"
+      ],
+      "reviewed_documents": [
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/zZPiglet/Task/blob/985019e33689e06a303e7e28aed92b8d779415ad/LICENSE",
+          "sha256": "d785b2ef4a326424368f752adb990716e6e2383864d57c231a072295c8673d89"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/zZPiglet/Task/blob/985019e33689e06a303e7e28aed92b8d779415ad/README.md",
+          "sha256": "5401affd3a68b0d475ec87a828bf25ff63c202c98dd646f95ff7baf099fa7540"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "The exact configured commit has no LICENSE/COPYING/NOTICE file; the script header credits zZPiglet and describes personal bug fixes, without an explicit redistribution grant.",
+    "The Scripts README contains no redistribution terms. The separate ddgksf2013 profile prohibits republication by public-account/self-media publishers; that restriction does not itself establish a ban on this personal GitHub repository, nor does it grant redistribution rights for this file.",
+    "The current zZPiglet/Task root has GPL-3.0, but asset/UnblockURLinWeChat.js returns HTTP 404 at the checked commit and the GitHub path-history query returned no commits. This check did not establish license applicability to the historical original or the ddgksf2013 modifications.",
+    "The embedded he/js-base64 components have their own licenses, which do not grant rights to the rest of the script."
+  ],
+  "minimum_missing_basis": "An explicit applicable license or rights-holder permission covering public redistribution of this exact main script, its modifications and the incorporated original. A current unrelated repository license, user request to copy, or another mirror is not sufficient evidence.",
+  "current_behavior": "Existing fixed external script URL and explicit blocked-license exception are retained. No new copy was published and no substitute script was silently installed.",
+  "tool_denial": false,
+  "privacy_security_review": "SECURITY-REVIEW.md"
+}

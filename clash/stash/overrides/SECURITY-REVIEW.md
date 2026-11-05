@@ -15,7 +15,7 @@
 
 B 站构建树中的 `@auraflare/shared`、Hono、fetch-cookie/node-fetch 及它们的 Node 传递依赖不构成设备端的隐式安装链；没有在当前 bundle 中运行或下载它们。CryptoJS 有条件的 `require("crypto")` 是 Node 内建模块探测。小红书 Env 有 `fs/path/got/tough-cookie/iconv-lite` 的 Node 分支，其中非内建包既未锁版本也未提供；当前 Stash 业务没有调用网络方法，也不会走 Node 分支。**这些文件不作为通用 Node 程序受支持，不能据本审查称其 Node 依赖完整。**
 
-单次人工静态审查覆盖五个入口和实际内联代码，审查深度集中在数据流和安全边界；没有进行形式证明、模糊测试、真实账号抓包、iOS/Stash 真机或服务端行为验证，也没有把未观察到恶意上传表述成安全保证。Codex Security 技能的附属流程文件无法通过提供的资源读取，未产出该产品的标准扫描或自动验证报告。
+单次人工静态审查覆盖五个入口和实际内联代码，审查深度集中在数据流和安全边界；补充验证仅从 SHA 固定的 response bundle 提取已核对的 Console 类，在不提供网络/存储 API 的 Node VM 中以 Stash 标识和合成数据检查日志格式与等级；没有执行 bundle 业务入口。没有进行形式证明、模糊测试、真实账号抓包、iOS/Stash 真机或服务端行为验证，也没有把未观察到恶意上传表述成安全保证。Codex Security 技能的附属流程文件无法通过提供的资源读取，未产出该产品的标准扫描或自动验证报告。
 
 对七个 B 站打包依赖和微信两个可识别 npm 库的精确版本查询 OSV，未返回已知漏洞条目，原始查询/结果见 [advisory-check.json](advisory-check.json)。这是数据库在核对时的结果，不覆盖未发布漏洞、Env 未标版本代码或错误的上游包声明，也不代替代码审查。
 
@@ -55,12 +55,16 @@ B 站构建树中的 `@auraflare/shared`、Hono、fetch-cookie/node-fetch 及它
 
 证据：固定 response bundle 的 `@Biliverse.Index.Caches`、`headers:$request.headers`；对应 [Response.mjs 第 202–265 行](https://github.com/Biliverse/ADBlock/blob/b0051916843f269d4b377aaf177f0d9e7b12e393/src/process/Response.mjs#L202)。默认 Feed.AD 开启，补位需要且缓存空时，向原 B 站推荐 API URL 再请求，携带原 headers 和查询参数，随后缓存候选条目；当前命中主机为 app.bilibili.com/app.biliapi.net。缓存中存在个性化推荐和媒体上下文，没有统一 TTL。不是向第三方作者上传，但会产生附加的已认证请求；自动重定向的最终处理由宿主决定，脚本未另做目标校验。
 
+**补位异常日志在默认 WARN 下也会发生。** `fetch(...).then` 内对响应 JSON 解析、条目处理或缓存写入发生异常时，来源第 249–250 行调用 `Console.error(e, response)`；JSON 解析失败是一个明确触发例。util 2.7.6 的 ERROR 门槛为等级 ≥1，WARN 为 2，因此无需打开 INFO/DEBUG。错误对象先被转为字符串，错误消息未脱敏，可能包含引擎生成的响应片段、标识或错误详情；JSC/Stash 实际消息格式和保留策略尚未真机验证。
+
+不能仅凭第二个实参就宣称完整响应头和正文被打印：当前日志类先对每个实参进行模板字符串转换，普通 response 对象变为 `[object Object]`，之后才交给日志输出。新增 [隔离日志测试](../../tests/check_bilibili_logging.js) 从原 bundle 提取实际类，以普通合成响应验证默认 WARN 会输出错误文本和 `[object Object]`，不会结构化输出其中的响应 header/body；若宿主对象有自定义字符串化行为则仍需另查，测试不能替代 Stash 验证。这不是已确认的完整认证头泄露。建议后续单独脱敏异常文本、避免传入完整响应，并核对已产生的日志；只保持 WARN 不能排除此路径。
+
 util 网络适配删除 Host/:authority/Content-Length 等头，其余业务头保留；未关闭 TLS 校验。B 站签名代码用 CryptoJS MD5 和应用协议常量重算请求签名，未发现提交真实用户密钥或挖矿代码。`fetchBilibili` 多主机重试函数在来源中整段注释，不在 bundle 执行路径，不应误报为实际重试。
 
 ### R5：通知/响应改写和解析边界（产品/可用性风险）
 
 - 微信通知可显示完整原链接，可能出现在通知中心和锁屏，点击后交给浏览器/支付宝；不会判断外链是否安全。URL 采用 `indexOf("http") == 0` 和 `includes("https://spotify.link")` 等字符串判断，未做严格 scheme/origin 校验。输入可导致意外目标或错误解析；未证明能绕过操作系统处理 scheme 的限制。默认 `useCache=false&forceRedirect=false` 不自动使用 web.archive.org 快照，不强制 302；参数解析 `ture` 拼写缺陷保留，不能据此当作安全控制。
-- B 站默认 LogLevel=WARN，INFO/DEBUG URL、设置和部分解析数据日志需相应等级才出现；已有持久化配置可改等级。不要把源码里注释的日志算成已执行。广告/跟踪阻断选项并不全部默认开启；固定脚本不是全面反跟踪产品。
+- B 站默认 LogLevel=WARN，INFO/DEBUG URL、设置和部分解析数据日志需相应等级才出现，但 WARN 仍输出 ERROR，补位异常的未脱敏错误文本见 R4；已有持久化配置可改等级。不要把源码里注释的日志算成已执行。广告/跟踪阻断选项并不全部默认开启；固定脚本不是全面反跟踪产品。
 - 小红书会删除/重写广告、直播带货、下载限制、水印、画质和部分作者/评论字段，详见功能表；没有发现上传请求，不等于媒体下载会匿名，App 后续仍向响应中的媒体目标联网。脚本缺少部分空值/JSON 错误兜底，递归遍历以及大 JSON/gRPC 解压处理没有统一资源配额；异常或大响应可能导致失败/耗时。尚无可复现的跨边界攻击，按可用性残余风险记录。
 
 ## 动态执行与第三方依赖结论
@@ -71,7 +75,7 @@ pako/gRPC/protobuf 的实际用途是解析/重编码响应，CryptoJS 用于 MD
 
 ## 供应链剩余事项
 
-1. 微信分发许可未解决，完整“全部脚本托管本仓库”的目标尚未达成。需主脚本权利人及其来源链许可，或经授权重写/替换。未绕过这一阻碍。
+1. 微信分发许可未解决，完整“全部脚本托管本仓库”的目标尚未达成。复核现有墨鱼文件、README、作者主页及 zZPiglet/Task 后，仍未建立覆盖该固定文件和改动的再分发依据；原作者当前仓库有 GPLv3，但所引用历史文件不可访问，不能据此替当前修改版授予许可。最小缺失是适用该文件/改动及其来源的明确许可或权利人授权，详见 [授权复核记录](wechat-permission-review.json)。未绕过这一阻碍。
 2. 四个本仓库文件引用先前快照 commit 的完整 SHA，带 SHA-256 路径；CI 对比本地和该提交中的真实 blob，检查缺失、篡改、配置引用、已知模块加载及语法。清单是审查证据，Stash 不强制校验摘要；必须保留快照提交可达性，按 README 使用 merge commit 合并。
 3. 更新需要新的源码/包许可核对、闭包审查、字节比较和新快照提交，之后才能换覆写引用。不能只改哈希让测试通过，更不能把 URL 换为 main/latest 或恢复可替换 release 资产。
 4. 真机仍需人工核对脚本下载、应用登录/播放、通知、CA/MITM、App API 变化及日志；仓库 CI 和 Mihomo 都不能替代 Stash HTTP 引擎测试。

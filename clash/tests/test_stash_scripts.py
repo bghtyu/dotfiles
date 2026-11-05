@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import shutil
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -15,6 +16,10 @@ SPEC.loader.exec_module(scripts)
 class StashScriptsTests(unittest.TestCase):
     def test_reviewed_snapshot(self):
         self.assertEqual(scripts.verify(), (4, 1))
+
+    def test_bilibili_error_logging_at_default_level(self):
+        subprocess.run(['node', str(ROOT / 'clash/tests/check_bilibili_logging.js')],
+                       capture_output=True, check=True)
 
     def test_rejects_missing_tampered_and_unpinned_dependencies(self):
         for mutation in ('missing', 'tampered', 'unpinned', 'secondary-script'):
