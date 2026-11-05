@@ -22,7 +22,7 @@ def check(binary):
             profile['proxy-providers'][name] = {'type': 'file', 'path': str(provider_path)}
         target = root/'config.yaml'; target.write_text(config.dump(profile))
         subprocess.run([binary, '-t', '-d', str(root), '-f', str(target)], check=True, timeout=30)
-        # All empty providers retain REJECT members; no silent DIRECT fallback.
+        # Catch-all automatic/manual groups retain REJECT when providers are empty.
         for i in range(len(profile['proxy-providers'])):
             (root / f'provider-{i}.yaml').write_text('proxies: []\n')
         subprocess.run([binary, '-t', '-d', str(root), '-f', str(target)], check=True, timeout=30)

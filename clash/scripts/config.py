@@ -118,14 +118,20 @@ def groups(client, providers):
     auto = spec['automatic']
     result = [{'name': '直连', 'type': 'select', 'proxies': ['DIRECT']},
               {'name': '全球加速', 'type': 'select', 'proxies': spec['global_options']}]
-    # REJECT cannot complete a health check. It keeps missing/empty regions fail-closed,
-    # instead of Stash's documented empty group => DIRECT behavior.
-    for region in spec['regions'] + [{'name': '自动选择', 'filter': '.*'}]:
-        group = {'name': region['name'], 'type': 'url-test', 'proxies': ['REJECT'],
-                 'use': list(providers), 'filter': f'(?i)(?:{region["filter"].replace("(?i)", "")})|^REJECT$',
+    # Region groups contain only actual provider nodes matching that region.
+    for region in spec['regions']:
+        group = {'name': region['name'], 'type': 'url-test', 'proxies': [],
+                 'use': list(providers), 'filter': region['filter'],
                  'interval': auto['interval'], 'tolerance': auto['tolerance'], 'lazy': auto['lazy']}
         group['url' if client == 'flclash' else 'benchmark-url'] = auto['url']
         result.append(group)
+    # Keep REJECT in the catch-all health-tested group and manual selection as a guard.
+    region = {'name': '自动选择', 'filter': '.*'}
+    group = {'name': region['name'], 'type': 'url-test', 'proxies': ['REJECT'],
+             'use': list(providers), 'filter': f'(?i)(?:.*)|^REJECT$',
+             'interval': auto['interval'], 'tolerance': auto['tolerance'], 'lazy': auto['lazy']}
+    group['url' if client == 'flclash' else 'benchmark-url'] = auto['url']
+    result.append(group)
     result.append({'name': '手动选择', 'type': 'select', 'proxies': ['REJECT'], 'use': list(providers)})
     for item in spec['services']:
         choices = spec['service_options']

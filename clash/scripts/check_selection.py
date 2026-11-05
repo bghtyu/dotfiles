@@ -57,7 +57,8 @@ def check(binary):
                         result = None
                         for _ in range(100):
                             if proc.poll() is not None: raise RuntimeError((root/'run.log').read_text())
-                            req = urllib.request.Request(f'http://127.0.0.1:{api_port}/proxies/'+urllib.parse.quote('新加坡'), headers={'Authorization': 'Bearer synthetic-local-test'})
+                            group_name = '新加坡' if with_node else '自动选择'
+                            req = urllib.request.Request(f'http://127.0.0.1:{api_port}/proxies/'+urllib.parse.quote(group_name), headers={'Authorization': 'Bearer synthetic-local-test'})
                             try:
                                 with urllib.request.urlopen(req, timeout=1) as response: result = json.load(response)
                                 if (with_node and result['now'].startswith('SG synthetic')) or (not with_node and result['now'] == 'REJECT'): break

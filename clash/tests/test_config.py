@@ -88,7 +88,7 @@ class ConfigTests(unittest.TestCase):
                 self.assertIn(fields[1] if fields[0] == 'MATCH' else fields[2], groups)
                 if fields[0] == 'RULE-SET': self.assertIn(fields[1], profile['rule-providers'])
 
-    def test_region_filters_and_empty_fail_closed(self):
+    def test_region_filters_omit_reject_but_global_guards_remain(self):
         samples = {'新加坡': ['SG 01', '新加坡 IPLC', '🇸🇬 Node'], '日本': ['JP 01', '日本 01'],
                    '台湾': ['TW 01', '台灣 01'], '美国': ['US 01', '🇺🇸 Node'], '香港': ['HK 01', '香港 01']}
         for profile in self.profiles.values():
@@ -96,15 +96,17 @@ class ConfigTests(unittest.TestCase):
             for region, names in samples.items():
                 group = groups[region]
                 self.assertEqual(group['type'], 'url-test')
-                self.assertEqual(group['proxies'], ['REJECT'])
+                self.assertEqual(group['proxies'], [])
                 self.assertNotIn('DIRECT', group['proxies'])
                 # regex flags must be at start for Python and RE2 compatibility.
                 pattern = group['filter']
                 for name in names: self.assertTrue(re.search(pattern, name), (region, name))
-                self.assertTrue(re.search(pattern, 'REJECT'))
+                self.assertFalse(re.search(pattern, 'REJECT'))
                 for other, other_names in samples.items():
                     if other != region:
                         for name in other_names: self.assertFalse(re.search(pattern, name), (region, name))
+            self.assertEqual(groups['自动选择']['proxies'], ['REJECT'])
+            self.assertEqual(groups['手动选择']['proxies'], ['REJECT'])
 
     def test_no_external_management_and_reviewed_rule_urls(self):
         for profile in self.profiles.values():
