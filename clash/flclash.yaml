@@ -46,7 +46,7 @@
 # SOFTWARE.
 mode: rule
 log-level: info
-ipv6: false
+ipv6: true
 allow-lan: false
 bind-address: 127.0.0.1
 mixed-port: 7890
@@ -54,7 +54,7 @@ tun:
   enable: false
 dns:
   enable: true
-  ipv6: false
+  ipv6: true
   enhanced-mode: redir-host
   default-nameserver:
   - 223.5.5.5
