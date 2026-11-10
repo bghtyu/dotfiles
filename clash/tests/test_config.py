@@ -36,6 +36,11 @@ class ConfigTests(unittest.TestCase):
     def test_generation_and_hashes(self):
         c.verify_manifest(); c.render(check=True)
 
+    def test_flclash_ipv6_and_dns_ipv6_enabled(self):
+        profile = self.profiles['flclash']
+        self.assertIs(profile['ipv6'], True)
+        self.assertIs(profile['dns']['ipv6'], True)
+
     def test_provider_names_are_meaningful_and_stable(self):
         expected = {'wechat-domain', 'bilibili-domain', 'crypto-domain', 'ai-domain',
                     'github-domain', 'youtube-domain', 'telegram-domain', 'google-domain',

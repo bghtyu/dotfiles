@@ -1,0 +1,80 @@
+{
+  "checked_on": "2026-11-05",
+  "endpoint": "https://api.osv.dev/v1/querybatch",
+  "queries": [
+    {
+      "package": {
+        "ecosystem": "npm",
+        "name": "@biliverse/protobuf"
+      },
+      "version": "1.1.0"
+    },
+    {
+      "package": {
+        "ecosystem": "npm",
+        "name": "@nsnanocat/grpc"
+      },
+      "version": "1.1.0"
+    },
+    {
+      "package": {
+        "ecosystem": "npm",
+        "name": "@nsnanocat/util"
+      },
+      "version": "2.7.6"
+    },
+    {
+      "package": {
+        "ecosystem": "npm",
+        "name": "@protobuf-ts/runtime"
+      },
+      "version": "2.11.1"
+    },
+    {
+      "package": {
+        "ecosystem": "npm",
+        "name": "@protobuf-ts/runtime-rpc"
+      },
+      "version": "2.11.1"
+    },
+    {
+      "package": {
+        "ecosystem": "npm",
+        "name": "crypto-js"
+      },
+      "version": "4.2.0"
+    },
+    {
+      "package": {
+        "ecosystem": "npm",
+        "name": "pako"
+      },
+      "version": "2.1.0"
+    },
+    {
+      "package": {
+        "ecosystem": "npm",
+        "name": "he"
+      },
+      "version": "1.2.0"
+    },
+    {
+      "package": {
+        "ecosystem": "npm",
+        "name": "js-base64"
+      },
+      "version": "3.7.2"
+    }
+  ],
+  "results": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+}

@@ -156,3 +156,6 @@ clash/local/
 *.key
 __pycache__/
 .venv/
+
+.idea
+.openidea

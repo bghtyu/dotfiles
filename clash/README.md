@@ -59,7 +59,7 @@ python clash/scripts/config.py --subscriptions clash/shared/subscriptions.local.
 
 Stash 使用 Fake-IP，启用 follow-rule 将境外 DoH 出站交给代理，并保留国内 DoH 直连。DNS 分类只包含重点境外域名，不等于业务分流规则；实际表现需分别实测。需要 iOS 版 Stash 3.6 或以上支持独立代理节点 DNS；版本及实际行为未在真机验证。为避免循环，两端规则将全部目的地为 1.1.1.1/32 的连接交给自动代理，不仅仅影响 DNS。空节点防直连在 Mihomo 模拟验证通过，Stash 仍需真机验证。域名策略和分流规则采用 domain/ipcidr 规则集，但 Stash 的启动耗时、DNS 匹配和内存影响尚未测量。
 
-FlClash 保持 redir-host，TUN 默认关闭，由用户在客户端决定；开启 TUN 才有可能覆盖更多非系统代理应用。应用自带 DoH、系统 DNS、LAN DNS、浏览器安全 DNS、VPN 中断、休眠/网络切换和 IPv6 都需要单独实测。**这不是完全防 DNS 泄漏的保证。** IPv6 默认关闭，客户端覆写可能改变行为。
+FlClash 保持 redir-host，TUN 默认关闭，由用户在客户端决定；开启 TUN 才有可能覆盖更多非系统代理应用。应用自带 DoH、系统 DNS、LAN DNS、浏览器安全 DNS、VPN 中断、休眠/网络切换和 IPv6 都需要单独实测。**这不是完全防 DNS 泄漏的保证。** FlClash 默认开启 IPv6 及 DNS IPv6 解析；Stash 的 IPv6 仍默认关闭，客户端覆写可能改变行为。
 
 不启用控制接口、面板或局域网代理共享。FlClash 管理内核所必需的本机通信由应用控制，不属于这份配置对外开放的 API。
 

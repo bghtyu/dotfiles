@@ -14,12 +14,19 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
           cache-dependency-path: clash/requirements.txt
       - run: python -m pip install -r clash/requirements.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Vendored script hashes, immutable references and syntax (no JS execution)
+        run: python clash/scripts/check_stash_scripts.py
       - name: Offline source, generation and semantic tests
         run: python -m unittest discover -s clash/tests -v
       - name: Fetch pinned official Mihomo validator

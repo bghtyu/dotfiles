@@ -19,5 +19,5 @@ http:
     argument: useCache=false&forceRedirect=false
 script-providers:
   wx110:
-    url: https://raw.githubusercontent.com/ddgksf2013/Scripts/97b8abea5ff52b5874c90d106d241e99894460d1/weixin110.js
+    url: https://raw.githubusercontent.com/bghtyu/dotfiles/cb223267964cef6154921a57596379ab2e422569/clash/stash/scripts/sha256/weixin110-fcdee2c6a9b12e9156c0643b191e406e361d72ace49e71f0741373d90e649576.js
     interval: 86400

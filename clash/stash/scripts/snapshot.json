@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "checked_on": "2026-11-05",
+  "assets": [
+    {
+      "name": "config.bundle.js",
+      "path": "sha256/config.bundle-c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d.js",
+      "sha256": "c347cebab974702b49c1ee1905f90b72fd97f33ede5bee40138d1f9a11168e1d",
+      "bytes": 6885,
+      "runtime_script_dependencies": [],
+      "allowed_literal_requires": [],
+      "upstream": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/config.bundle.js"
+    },
+    {
+      "name": "request.bundle.js",
+      "path": "sha256/request.bundle-47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a.js",
+      "sha256": "47d002c07da40357110c8ae5406f117bc608812d075eb54a54b2cbd768ea5b1a",
+      "bytes": 215238,
+      "runtime_script_dependencies": [],
+      "allowed_literal_requires": [
+        "crypto"
+      ],
+      "upstream": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/request.bundle.js"
+    },
+    {
+      "name": "response.bundle.js",
+      "path": "sha256/response.bundle-e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60.js",
+      "sha256": "e8768eb5c75bbfaea78f5798ac7827c431f81a61416a7877753f36dd36b9cb60",
+      "bytes": 1091042,
+      "runtime_script_dependencies": [],
+      "allowed_literal_requires": [],
+      "upstream": "https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js"
+    },
+    {
+      "name": "xiaohongshu.js",
+      "path": "sha256/xiaohongshu-318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498.js",
+      "sha256": "318d89bce1117edb26a93b383804e195649ec4674a04efa9e3ddb4ef7f34b498",
+      "bytes": 28643,
+      "runtime_script_dependencies": [],
+      "allowed_literal_requires": [
+        "fs",
+        "path",
+        "got",
+        "tough-cookie",
+        "iconv-lite"
+      ],
+      "upstream": "https://raw.githubusercontent.com/fmz200/wool_scripts/2dfe1fa129085015a9abed46b4474d34d4426269/Scripts/xiaohongshu/xiaohongshu.js"
+    },
+    {
+      "name": "weixin110.js",
+      "path": "sha256/weixin110-fcdee2c6a9b12e9156c0643b191e406e361d72ace49e71f0741373d90e649576.js",
+      "sha256": "fcdee2c6a9b12e9156c0643b191e406e361d72ace49e71f0741373d90e649576",
+      "bytes": 88958,
+      "runtime_script_dependencies": [],
+      "allowed_literal_requires": [],
+      "upstream": "https://raw.githubusercontent.com/ddgksf2013/Scripts/97b8abea5ff52b5874c90d106d241e99894460d1/weixin110.js",
+      "upstream_sha256": "46067f2f84b38afedc9115b881f1d06018feb76a17b949a596fb261abae36a7b",
+      "upstream_bytes": 88342,
+      "transformation": "Prepend distribution/license notice only; remaining bytes identical to upstream.",
+      "notice_bytes": 616,
+      "distribution_license": "GPL-3.0-only",
+      "license_evidence": "../overrides/wechat-permission-review.json"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "sources/wechat/UnblockURLinWeChat.original.js",
+      "bytes": 86443,
+      "sha256": "79098ac4d2eb7932c9b2b45ac7891469703626855e5d13ab4374af52cc48983e"
+    },
+    {
+      "path": "sources/wechat/he-1.2.0.js",
+      "bytes": 100899,
+      "sha256": "76c554d5bbfd032fe620595076a50abea5124b9cbd4e9ffe6ac94a4f855aeceb"
+    },
+    {
+      "path": "sources/wechat/js-base64-3.7.2-src/Makefile",
+      "bytes": 435,
+      "sha256": "1b7886f56dd82f47d8daf9fdf51706d01faa9ced1ae9a91716bb9b08b3f42614"
+    },
+    {
+      "path": "sources/wechat/js-base64-3.7.2-src/base64.ts",
+      "bytes": 10736,
+      "sha256": "513fc586ac51e36cdf6d432a5e7aed3874b927b506cddc1e7b91c91c8de29851"
+    },
+    {
+      "path": "sources/wechat/js-base64-3.7.2-src/package.json",
+      "bytes": 751,
+      "sha256": "0f14ca30ddb8281b35139ed086f79c378346e8e3303ed7a7958a84d4dedf1547"
+    },
+    {
+      "path": "sources/wechat/js-base64-3.7.2-src/util/makecjs",
+      "bytes": 1559,
+      "sha256": "4230de289420807ce4ff238e73177dbbdd9a0418861406c9a96332ced6968fb3"
+    },
+    {
+      "path": "sources/wechat/js-base64-3.7.2.js",
+      "bytes": 12944,
+      "sha256": "62534ff84d340c66bef7f58e60c635a8a12f5140709a4cdcc05c15628638add4"
+    }
+  ],
+  "license_files": [
+    {
+      "path": "licenses/wechat-ddgksf2013-MIT.txt",
+      "bytes": 1045,
+      "sha256": "068196b1e169465563772c7e4a12057a631f1cd81b4278b2067696ef11554a43"
+    },
+    {
+      "path": "licenses/wechat-he-MIT.txt",
+      "bytes": 1077,
+      "sha256": "483acb265f182907d1caf6cff9c16c96f31325ed23792832cc5d8b12d5f88c8a"
+    },
+    {
+      "path": "licenses/wechat-js-base64-BSD-3-Clause.txt",
+      "bytes": 1480,
+      "sha256": "fcf06aacb36ee29237110d6b3a9fbd6296e85ad4324263abf5f8a5cfb5706c81"
+    },
+    {
+      "path": "licenses/wechat-zZPiglet-GPL-3.0.txt",
+      "bytes": 35145,
+      "sha256": "d785b2ef4a326424368f752adb990716e6e2383864d57c231a072295c8673d89"
+    }
+  ]
+}

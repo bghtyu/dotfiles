@@ -1,0 +1,39 @@
+{
+  "checked_on": "2026-11-05",
+  "components": [
+    {
+      "name": "he",
+      "version": "1.2.0",
+      "license": "MIT",
+      "source_path": "sources/wechat/he-1.2.0.js",
+      "source_sha256": "76c554d5bbfd032fe620595076a50abea5124b9cbd4e9ffe6ac94a4f855aeceb",
+      "license_path": "licenses/wechat-he-MIT.txt",
+      "tarball": "https://registry.npmjs.org/he/-/he-1.2.0.tgz",
+      "integrity": "sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw=="
+    },
+    {
+      "name": "js-base64",
+      "version": "3.7.2",
+      "license": "BSD-3-Clause",
+      "source_path": "sources/wechat/js-base64-3.7.2.js",
+      "source_sha256": "62534ff84d340c66bef7f58e60c635a8a12f5140709a4cdcc05c15628638add4",
+      "license_path": "licenses/wechat-js-base64-BSD-3-Clause.txt",
+      "tarball": "https://registry.npmjs.org/js-base64/-/js-base64-3.7.2.tgz",
+      "integrity": "sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==",
+      "preferred_source": "sources/wechat/js-base64-3.7.2-src/base64.ts",
+      "source_commit": "bf0845d5b561367690153f853d5e6a36cfed71ed",
+      "build_recipe": "sources/wechat/js-base64-3.7.2-src/Makefile",
+      "build_note": "Preferred TypeScript, upstream Makefile/package metadata and wrapper generator retained. Compiler/test tooling is not a runtime Stash dependency and is not executed here; no exact upstream minifier recipe is asserted."
+    }
+  ],
+  "original_source": {
+    "repository": "zZPiglet/Task",
+    "commit": "0a70fbe27dfb072dac29423d661ed3c47cf66aab",
+    "path": "asset/UnblockURLinWeChat.js",
+    "local_path": "sources/wechat/UnblockURLinWeChat.original.js",
+    "sha256": "79098ac4d2eb7932c9b2b45ac7891469703626855e5d13ab4374af52cc48983e",
+    "license": "GPL-3.0-only"
+  },
+  "distribution": "The combined script remains GPLv3. MIT permission applies to ddgksf2013 contributions; he MIT and js-base64 BSD notices are retained.",
+  "embedded_blocks_unchanged_from_original": true
+}

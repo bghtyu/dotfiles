@@ -1,0 +1,132 @@
+{
+  "checked_on": "2026-11-05",
+  "requested_action": "Redistribute the currently configured WeChat script in public bghtyu/dotfiles and change the provider to a repository snapshot.",
+  "target": {
+    "repository": "ddgksf2013/Scripts",
+    "commit": "97b8abea5ff52b5874c90d106d241e99894460d1",
+    "path": "weixin110.js",
+    "bytes": 88342,
+    "sha256": "46067f2f84b38afedc9115b881f1d06018feb76a17b949a596fb261abae36a7b"
+  },
+  "status": "permission-basis-recorded-vendoring-under-GPLv3",
+  "checks": [
+    {
+      "repository": "ddgksf2013/Scripts",
+      "checked_commit": "0cddbb6bc31344315afba773ebb4e7ce29f7fd8f",
+      "github_detected_license": null,
+      "notice_paths_found": [
+        "README.md"
+      ],
+      "reviewed_documents": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/ddgksf2013/Scripts/blob/0cddbb6bc31344315afba773ebb4e7ce29f7fd8f/README.md",
+          "sha256": "16524daebe853e222ff30fdb8e0004224328fcaa46e72044dc227819fec32b66"
+        }
+      ]
+    },
+    {
+      "repository": "ddgksf2013/ddgksf2013",
+      "checked_commit": "dd96698b7c4c4bce3aed90067d9af57fb8036a44",
+      "github_detected_license": null,
+      "notice_paths_found": [
+        "README.md"
+      ],
+      "reviewed_documents": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/ddgksf2013/ddgksf2013/blob/dd96698b7c4c4bce3aed90067d9af57fb8036a44/README.md",
+          "sha256": "adbdbfdb8ea4b821963d988d9ca70f92cc4d3b108d8c75c798328610832e66a8"
+        }
+      ]
+    },
+    {
+      "repository": "zZPiglet/Task",
+      "checked_commit": "985019e33689e06a303e7e28aed92b8d779415ad",
+      "github_detected_license": "GPL-3.0",
+      "notice_paths_found": [
+        "LICENSE",
+        "README.md"
+      ],
+      "reviewed_documents": [
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/zZPiglet/Task/blob/985019e33689e06a303e7e28aed92b8d779415ad/LICENSE",
+          "sha256": "d785b2ef4a326424368f752adb990716e6e2383864d57c231a072295c8673d89"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/zZPiglet/Task/blob/985019e33689e06a303e7e28aed92b8d779415ad/README.md",
+          "sha256": "5401affd3a68b0d475ec87a828bf25ff63c202c98dd646f95ff7baf099fa7540"
+        }
+      ]
+    },
+    {
+      "repository": "zZPiglet/Task",
+      "checked_branch": "master",
+      "checked_commit": "0a70fbe27dfb072dac29423d661ed3c47cf66aab",
+      "github_detected_license": "GPL-3.0",
+      "reviewed_documents": [
+        {
+          "path": "asset/UnblockURLinWeChat.js",
+          "url": "https://github.com/zZPiglet/Task/blob/0a70fbe27dfb072dac29423d661ed3c47cf66aab/asset/UnblockURLinWeChat.js",
+          "sha256": "79098ac4d2eb7932c9b2b45ac7891469703626855e5d13ab4374af52cc48983e"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/zZPiglet/Task/blob/0a70fbe27dfb072dac29423d661ed3c47cf66aab/LICENSE",
+          "sha256": "d785b2ef4a326424368f752adb990716e6e2383864d57c231a072295c8673d89"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/zZPiglet/Task/blob/0a70fbe27dfb072dac29423d661ed3c47cf66aab/README.md",
+          "sha256": "0d6a147da288c3cf525d6a35824436de19f3845edf275d4a0fcaacac39c8791f"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "The earlier missing-original conclusion checked the default main branch, not the master branch explicitly named in the original URL. master remains available; its exact original script, GPLv3 license and README license statement were retrieved at the same immutable commit.",
+    "The exact ddgksf2013 file credits zZPiglet and differs from the original through a header and bug-fix logic. Both embedded minified library blocks are byte-identical to the original.",
+    "The user-supplied MIT authorization supplies the stated basis for the ddgksf2013 contributions. It is not treated as overriding GPLv3 on the original.",
+    "MIT and BSD-3-Clause notices and readable library sources are retained alongside the combined GPLv3 distribution.",
+    "The stored runtime file prepends a dated distribution/attribution notice only; stripping that notice reproduces every upstream byte.",
+    "The private confirmation remains user-supplied evidence, with the identity/version authentication limit recorded above."
+  ],
+  "current_behavior": "All runtime providers use repository commit snapshots. The WeChat runtime file prepends a dated distribution notice; stripping it reproduces all 88,342 upstream bytes. GET/export-key business behavior is unchanged.",
+  "tool_denial": false,
+  "privacy_security_review": "SECURITY-REVIEW.md",
+  "permission_basis": {
+    "ddgksf2013_contributions": {
+      "license": "MIT",
+      "source": "Repository maintainer supplied permission attributed to ddgksf2013 for copying the WeChat script into the configuration repository under MIT terms.",
+      "verification_limit": "Identity and exact version scope of that private confirmation were not independently authenticated. The maintainer supplied it in the context of this configured script.",
+      "privacy": "No screenshot, private contact details, conversation identifiers or private message text are published."
+    },
+    "original": {
+      "author": "zZPiglet",
+      "repository": "zZPiglet/Task",
+      "commit": "0a70fbe27dfb072dac29423d661ed3c47cf66aab",
+      "script": "asset/UnblockURLinWeChat.js",
+      "readme_license_statement": "GPLv3",
+      "license_copy": "../scripts/licenses/wechat-zZPiglet-GPL-3.0.txt"
+    },
+    "combined_work": "GPL-3.0-only; MIT authorization is applied only to ddgksf2013 contributions, not as a relicensing of the original or the entire file.",
+    "third_party_components": [
+      {
+        "name": "he",
+        "version": "1.2.0",
+        "license": "MIT"
+      },
+      {
+        "name": "js-base64",
+        "version": "3.7.2",
+        "license": "BSD-3-Clause"
+      }
+    ],
+    "compatibility_sources": [
+      "https://www.gnu.org/licenses/license-list.en.html",
+      "https://www.gnu.org/licenses/gpl-faq.en.html#WhatDoesCompatMean"
+    ]
+  }
+}
